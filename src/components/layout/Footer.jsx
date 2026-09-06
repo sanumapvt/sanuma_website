@@ -39,14 +39,6 @@ export default function Footer() {
               Navigation
             </h3>
             <ul className="flex flex-col gap-3">
-              <li>
-                <Link
-                  href="/"
-                  className="text-sm text-[#5F6868] hover:text-[#009688] transition-colors"
-                >
-                  Home
-                </Link>
-              </li>
               {NAV_LINKS.map((link) => (
                 <li key={link.label}>
                   <Link

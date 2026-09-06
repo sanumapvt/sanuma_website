@@ -117,6 +117,7 @@ export const SITE_CONFIG = {
 };
 
 export const NAV_LINKS = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Businesses", href: "/businesses" },
   { label: "How We Build", href: "/#how-we-build" },
