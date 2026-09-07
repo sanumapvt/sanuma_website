@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/MotionReveal";
 import AccordionFAQ from "@/components/ui/AccordionFAQ";
-
+import PhaseCardsList from "@/components/sections/PhaseCardsList";
 export const metadata = {
   title: "How We Build Businesses | Sanuma India Private Limited",
   description:
@@ -36,65 +36,6 @@ export const metadata = {
     type: "website",
   },
 };
-
-const PHASES_DETAILED = [
-  {
-    number: "01",
-    name: "Idea",
-    subtitle: "Opportunity Validation & Economic Architecture",
-    icon: Lightbulb,
-    description:
-      "Before writing a line of code or deploying capital, we validate the underlying economic thesis, examine supply-demand dynamics, and de-risk core assumptions.",
-    deliverables: [
-      "Market whitespace identification & competitor vulnerability mapping",
-      "Unit economics modeling and pricing elasticity stress-testing",
-      "Regulatory and operational hurdle pre-assessment",
-      "Foundational commercial roadmap & execution blueprint",
-    ],
-  },
-  {
-    number: "02",
-    name: "Build",
-    subtitle: "Enterprise Technology & Infrastructure Deployment",
-    icon: Hammer,
-    description:
-      "We architect high-performance digital infrastructure, deploy modern cloud-native systems, and build scalable core products with principal velocity.",
-    deliverables: [
-      "Custom software and cloud-native architecture without agency technical debt",
-      "Relational data schema and secure transactional processing",
-      "Agile iterative sprints with direct venture leadership",
-      "Enterprise security, compliance, and resilient cloud hosting",
-    ],
-  },
-  {
-    number: "03",
-    name: "Systemize",
-    subtitle: "Operating Playbooks & Embedded AI Automation",
-    icon: Cpu,
-    description:
-      "A business cannot scale if it depends on heroics. We codify every workflow into repeatable operating procedures and embed automated AI pipelines.",
-    deliverables: [
-      "Documented standard operating procedures (SOPs) across departments",
-      "Intelligent AI workflows automating repetitive tasks and decisions",
-      "Unified operational telemetry and executive KPI dashboards",
-      "Robust quality control mechanisms eliminating operational bottlenecks",
-    ],
-  },
-  {
-    number: "04",
-    name: "Scale",
-    subtitle: "Distribution Acceleration & Compounding Expansion",
-    icon: TrendingUp,
-    description:
-      "With bulletproof systems and scalable technology in place, we expand market presence across India with disciplined capital efficiency.",
-    deliverables: [
-      "Omnichannel distribution expansion across Indian tier 1, 2, and 3 markets",
-      "Strategic joint ventures and high-conviction partner collaborations",
-      "Compounding unit margin expansion through automated operational leverage",
-      "Continuous optimization through real-time feedback loops and analytics",
-    ],
-  },
-];
 
 const COMPARISON_POINTS = [
   {
@@ -226,57 +167,7 @@ export default function HowWeBuildPage() {
               </h2>
             </div>
 
-            <div className="space-y-8">
-              {PHASES_DETAILED.map((phase, idx) => {
-                const Icon = phase.icon;
-                return (
-                  <FadeIn key={phase.number} direction="up" delay={idx * 0.1}>
-                    <div className="p-8 sm:p-12 rounded-3xl bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/40 hover:shadow-xl hover:shadow-[#009688]/5 transition-all duration-300">
-                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                        {/* Left Stage Summary */}
-                        <div className="lg:col-span-5">
-                          <div className="flex items-center gap-4 mb-4">
-                            <span className="font-heading text-4xl sm:text-5xl font-extrabold text-[#009688]">
-                              {phase.number}
-                            </span>
-                            <div className="w-12 h-12 rounded-2xl bg-[#009688]/10 text-[#009688] flex items-center justify-center">
-                              <Icon className="w-6 h-6" />
-                            </div>
-                          </div>
-                          <div className="text-xs font-bold uppercase tracking-wider text-[#009688] mb-1">
-                            Phase {phase.number} · {phase.name}
-                          </div>
-                          <h3 className="text-2xl sm:text-3xl font-bold text-[#172121] mb-4">
-                            {phase.subtitle}
-                          </h3>
-                          <p className="text-base text-[#5F6868] leading-relaxed">
-                            {phase.description}
-                          </p>
-                        </div>
-
-                        {/* Right Stage Execution Deliverables */}
-                        <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl border border-[#E5EAEA]">
-                          <div className="text-xs font-bold uppercase tracking-wider text-[#172121] mb-4 flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-[#009688]" />
-                            <span>Core Engineering Deliverables</span>
-                          </div>
-                          <ul className="space-y-3.5">
-                            {phase.deliverables.map((item, dIdx) => (
-                              <li key={dIdx} className="flex items-start gap-3 text-sm sm:text-base text-[#5F6868]">
-                                <div className="w-5 h-5 rounded-md bg-[#009688]/10 text-[#009688] flex items-center justify-center flex-shrink-0 mt-0.5">
-                                  <Check className="w-3.5 h-3.5 stroke-[2.5]" />
-                                </div>
-                                <span className="leading-snug">{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </FadeIn>
-                );
-              })}
-            </div>
+            <PhaseCardsList />
           </section>
 
           {/* Agency vs Sanuma Comparison Matrix (AEO Clarifier) */}
