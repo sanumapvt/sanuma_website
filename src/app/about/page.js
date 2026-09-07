@@ -17,6 +17,7 @@ import {
   User,
   MapPin,
 } from "lucide-react";
+import AccordionFAQ from "@/components/ui/AccordionFAQ";
 
 export const metadata = {
   title: "About Sanuma | Business Building Company in Ahmedabad",
@@ -238,19 +239,7 @@ export default function AboutPage() {
                 operating model, and how we differ from traditional agencies.
               </p>
             </div>
-
-            <div className="divide-y divide-[#E5EAEA]">
-              {SITE_CONFIG.faqs.map((faq, index) => (
-                <div key={index} className="py-6 first:pt-0 last:pb-0">
-                  <h3 className="text-lg sm:text-xl font-bold text-[#172121] mb-2">
-                    {faq.question}
-                  </h3>
-                  <p className="text-base text-[#5F6868] leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <AccordionFAQ items={SITE_CONFIG.faqs} />
           </section>
 
           {/* Bottom Call to Action Card with internal links */}

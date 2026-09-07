@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { BUSINESSES } from "@/data/businesses";
-import { ArrowUpRight, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, MapPin } from "lucide-react";
 import { FadeIn } from "@/components/ui/MotionReveal";
 
 export default function Businesses() {
@@ -41,21 +41,59 @@ export default function Businesses() {
         </div>
 
         {hasBusinesses ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {BUSINESSES.map((business) => (
-              <motion.div
-                key={business.name}
-                whileHover={{ y: -6 }}
-                className="p-8 rounded-2xl bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/40 transition-all duration-300"
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {BUSINESSES.slice(0, 3).map((biz) => (
+                <div
+                  key={biz.name}
+                  className="p-7 rounded-2xl bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/40 hover:bg-white hover:shadow-md hover:shadow-black/[0.02] transition-all duration-300 flex flex-col justify-between group"
+                >
+                  <div>
+                    {/* Logo + Name */}
+                    <div className="flex items-center gap-3.5 mb-4">
+                      <div
+                        className={`w-11 h-11 rounded-xl bg-gradient-to-br ${biz.monogramColor} text-white font-extrabold text-sm flex items-center justify-center tracking-wider shadow-xs flex-shrink-0 group-hover:scale-105 transition-transform`}
+                      >
+                        {biz.monogram}
+                      </div>
+                      <h3 className="text-xl font-bold text-[#172121] group-hover:text-[#009688] transition-colors leading-snug">
+                        {biz.name}
+                      </h3>
+                    </div>
+
+                    {/* 2-line Description */}
+                    <p className="text-sm text-[#5F6868] line-clamp-2 leading-relaxed">
+                      {biz.description}
+                    </p>
+                  </div>
+
+                  {/* Location */}
+                  <div className="mt-6 pt-4 border-t border-[#E5EAEA] flex items-center justify-between text-xs text-[#5F6868]">
+                    <span className="flex items-center gap-1.5 font-medium">
+                      <MapPin className="w-3.5 h-3.5 text-[#009688]" />
+                      {biz.location}
+                    </span>
+                    <Link
+                      href="/businesses"
+                      className="text-[#009688] font-semibold inline-flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <span>Explore</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-12 text-center">
+              <Link
+                href="/businesses"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#F7F9F9] hover:bg-white border border-[#E5EAEA] hover:border-[#009688]/40 text-sm font-semibold text-[#172121] hover:text-[#009688] transition-all shadow-xs"
               >
-                <h3 className="text-xl font-bold text-[#172121]">
-                  {business.name}
-                </h3>
-                <p className="mt-2 text-sm text-[#5F6868]">
-                  {business.description}
-                </p>
-              </motion.div>
-            ))}
+                <span>View all {BUSINESSES.length} ventures in portfolio</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         ) : (
           <FadeIn direction="up" delay={0.15}>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -19,9 +20,15 @@ export default function HowWeBuild() {
               subtitle="Every business we launch follows a deliberate, repeatable four-stage lifecycle engineered for resilience and scalable expansion."
             />
           </FadeIn>
-          <FadeIn direction="left" delay={0.2} className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-full bg-[#F7F9F9] border border-[#E5EAEA] text-xs font-semibold uppercase tracking-[0.2em] text-[#5F6868] whitespace-nowrap">
-            <Sparkles className="w-3.5 h-3.5 text-[#009688]" />
-            <span>The 4-Stage Lifecycle</span>
+          <FadeIn direction="left" delay={0.2} className="hidden lg:flex items-center gap-3">
+            <Link
+              href="/how-we-build"
+              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/40 text-xs font-semibold uppercase tracking-[0.2em] text-[#5F6868] hover:text-[#009688] transition-all whitespace-nowrap"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#009688]" />
+              <span>Explore Methodology</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
           </FadeIn>
         </div>
 

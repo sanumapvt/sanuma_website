@@ -1,30 +1,30 @@
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 import { BUSINESSES } from "@/data/businesses";
 import { SITE_CONFIG } from "@/lib/constants";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
-import { ShieldCheck, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Building2, MapPin } from "lucide-react";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/MotionReveal";
 
 export const metadata = {
-  title: "Businesses Built by Sanuma",
+  title: "Companies Built by Sanuma | Portfolio",
   description:
-    "Explore businesses created, developed, and scaled by Sanuma India Private Limited. Sanuma has created several businesses and collaborates across India.",
+    "Explore companies built, developed, and scaled by Sanuma India Private Limited. Operating across AI, systems, and enterprise technology.",
   alternates: {
     canonical: "/businesses",
   },
   openGraph: {
-    title: "Businesses Built by Sanuma",
+    title: "Companies Built by Sanuma | Portfolio",
     description:
-      "Businesses created, developed, and scaled by Sanuma India Private Limited in Ahmedabad.",
+      "Companies built, developed, and scaled by Sanuma India Private Limited in Ahmedabad, Gujarat.",
     url: `${SITE_CONFIG.url}/businesses`,
     type: "website",
   },
 };
 
 export default function BusinessesPage() {
-  const hasBusinesses = BUSINESSES.length > 0;
-
   const breadcrumbs = [
     { name: "Home", url: "/" },
     { name: "Businesses", url: "/businesses" },
@@ -32,9 +32,9 @@ export default function BusinessesPage() {
 
   const breadcrumbSchema = getBreadcrumbSchema(breadcrumbs);
   const webPageSchema = getWebPageSchema({
-    title: "Businesses Built by Sanuma",
+    title: "Companies Built by Sanuma | Portfolio",
     description:
-      "Businesses created, developed, and scaled by Sanuma India Private Limited.",
+      "Companies built, developed, and scaled by Sanuma India Private Limited.",
     url: `${SITE_CONFIG.url}/businesses`,
   });
 
@@ -51,54 +51,85 @@ export default function BusinessesPage() {
 
       <div className="pt-32 sm:pt-40 pb-24 sm:pb-32 bg-white">
         <Container>
-          {/* Main Page Header (H1) */}
+          {/* Header */}
           <div className="max-w-3xl mb-16 sm:mb-20">
-            <SectionHeading
-              as="h1"
-              label="Portfolio"
-              title="Businesses Built by Sanuma"
-              subtitle="Sanuma is a parent business-building company that has already created several businesses and collaborates with partner companies to build, develop, and scale ventures across India."
-            />
+            <FadeIn direction="up">
+              <SectionHeading
+                as="h1"
+                label="Portfolio"
+                title="Businesses built by Sanuma."
+                subtitle="Sanuma originates proprietary companies and co-develops high-conviction ventures across India by combining strategy, robust operating systems, AI, and scalable technology."
+              />
+            </FadeIn>
           </div>
 
-          {hasBusinesses ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {BUSINESSES.map((biz) => (
-                <div
-                  key={biz.name}
-                  className="p-8 rounded-2xl bg-[#F7F9F9] border border-[#E5EAEA]"
-                >
-                  <h2 className="text-xl font-bold text-[#172121]">{biz.name}</h2>
-                  <p className="mt-2 text-sm text-[#5F6868]">{biz.description}</p>
+          {/* Clean Company Cards Grid: Logo + Name + 2-line Description + Location */}
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-20 sm:mb-28" staggerDelay={0.08}>
+            {BUSINESSES.map((biz) => (
+              <StaggerItem key={biz.name}>
+                <div className="h-full p-7 rounded-2xl bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/40 hover:bg-white hover:shadow-md hover:shadow-black/[0.02] transition-all duration-300 flex flex-col justify-between group">
+                  <div>
+                    {/* Company Logo + Name */}
+                    <div className="flex items-center gap-4 mb-4">
+                      <div
+                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${biz.monogramColor} text-white font-extrabold text-base flex items-center justify-center tracking-wider shadow-xs flex-shrink-0 group-hover:scale-105 transition-transform`}
+                      >
+                        {biz.monogram}
+                      </div>
+                      <h2 className="text-xl font-bold text-[#172121] group-hover:text-[#009688] transition-colors leading-snug">
+                        {biz.name}
+                      </h2>
+                    </div>
+
+                    {/* 2-line Description */}
+                    <p className="text-sm text-[#5F6868] line-clamp-2 leading-relaxed">
+                      {biz.description}
+                    </p>
+                  </div>
+
+                  {/* Location */}
+                  <div className="mt-6 pt-4 border-t border-[#E5EAEA] flex items-center justify-between text-xs text-[#5F6868]">
+                    <span className="flex items-center gap-1.5 font-medium">
+                      <MapPin className="w-3.5 h-3.5 text-[#009688]" />
+                      {biz.location}
+                    </span>
+                    <span className="text-[#009688] font-semibold opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-0.5">
+                      <span>Explore</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="py-20 px-8 sm:px-16 rounded-3xl bg-[#F7F9F9] border border-[#E5EAEA] text-center max-w-3xl mx-auto">
-              <div className="w-14 h-14 rounded-2xl bg-[#009688]/10 text-[#009688] flex items-center justify-center mx-auto mb-6">
-                <ShieldCheck className="w-7 h-7" aria-hidden="true" />
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
+          {/* Simple Bottom Collaboration Card */}
+          <div className="p-8 sm:p-12 rounded-3xl bg-[#172121] text-white">
+            <div className="max-w-3xl">
+              <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#009688] mb-3">
+                Collaborate
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#172121] mb-4">
-                Ventures in Active Development &amp; Scale
+              <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight mb-4">
+                Have a business you want to build or scale?
               </h2>
-              <p className="text-base sm:text-lg text-[#5F6868] leading-relaxed max-w-xl mx-auto mb-8">
-                Sanuma operates as a parent business-building company. Having already
-                created and developed multiple ventures, we actively collaborate with
-                forward-thinking companies across India to build scalable market leaders.
-                Brand showcases and verified assets will be featured here upon emergence.
+              <p className="text-base text-white/80 leading-relaxed mb-8">
+                We partner with ambitious enterprises and founders across India to build scalable operating models and deploy high-leverage technology.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <Button href="/collaborate" variant="primary" size="md">
-                  <span>Collaborate Across India</span>
+                  <span>Work With Us</span>
                   <ArrowRight className="w-4 h-4" />
                 </Button>
-                <Button href="/contact" variant="ghost" size="md">
-                  <span>Contact Sanuma Team</span>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-full text-sm font-medium border border-white/20 text-white hover:bg-white/10 transition-colors"
+                >
+                  <span>Contact Our Team</span>
                   <ArrowUpRight className="w-4 h-4" />
-                </Button>
+                </Link>
               </div>
             </div>
-          )}
+          </div>
         </Container>
       </div>
     </>

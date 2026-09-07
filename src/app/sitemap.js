@@ -18,6 +18,12 @@ export default function sitemap() {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/how-we-build`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/businesses`,
       lastModified: now,
       changeFrequency: "monthly",
