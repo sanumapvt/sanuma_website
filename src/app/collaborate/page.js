@@ -4,6 +4,7 @@ import CollaborateForm from "./CollaborateForm";
 import { SITE_CONFIG } from "@/lib/constants";
 import { getBreadcrumbSchema, getWebPageSchema } from "@/lib/schema";
 import { Mail, Phone, MapPin, CheckCircle2 } from "lucide-react";
+import { FadeIn } from "@/components/ui/MotionReveal";
 
 export const metadata = {
   title: "Build & Scale a Business with Sanuma",
@@ -50,7 +51,7 @@ export default function CollaboratePage() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left Column: Context & Direct Contact */}
-            <div className="lg:col-span-5">
+            <FadeIn direction="up" className="lg:col-span-5">
               <SectionHeading
                 as="h1"
                 label="Collaboration"
@@ -107,12 +108,22 @@ export default function CollaboratePage() {
                   </address>
                 </div>
               </div>
-            </div>
+            </FadeIn>
 
-            {/* Right Column: Inquiry Form */}
-            <div className="lg:col-span-7">
-              <CollaborateForm />
-            </div>
+            {/* Right Column: Interactive Collaboration Form */}
+            <FadeIn direction="up" delay={0.15} className="lg:col-span-7">
+              <div className="p-8 sm:p-12 rounded-3xl bg-[#F7F9F9] border border-[#E5EAEA] shadow-sm">
+                <div className="mb-8">
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#172121]">
+                    Tell us about your venture or proposal
+                  </h2>
+                  <p className="mt-2 text-sm text-[#5F6868]">
+                    Whether you are an established business seeking AI automation, or an operator with a high-conviction thesis, reach out directly.
+                  </p>
+                </div>
+                <CollaborateForm />
+              </div>
+            </FadeIn>
           </div>
         </Container>
       </div>

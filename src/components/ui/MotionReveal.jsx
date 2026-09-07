@@ -1,12 +1,22 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 
-// Smooth standard easing curve
-const transitionConfig = {
-  duration: 0.6,
-  ease: [0.22, 1, 0.36, 1],
-};
+export function ScrollProgressBar() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#009688] via-[#26A69A] to-[#80CBC4] origin-left z-[60] pointer-events-none"
+      style={{ scaleX }}
+    />
+  );
+}
 
 export function FadeIn({
   children,
@@ -46,10 +56,36 @@ export function FadeIn({
   );
 }
 
+export function ScaleIn({
+  children,
+  className = "",
+  delay = 0,
+  duration = 0.5,
+  once = true,
+  ...props
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.96 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once, margin: "-40px" }}
+      transition={{
+        duration,
+        delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className={className}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export function StaggerContainer({
   children,
   className = "",
-  staggerDelay = 0.1,
+  staggerDelay = 0.08,
   delayChildren = 0,
   once = true,
   ...props
@@ -79,7 +115,7 @@ export function StaggerContainer({
 export function StaggerItem({
   children,
   className = "",
-  yOffset = 24,
+  yOffset = 20,
   duration = 0.5,
   ...props
 }) {
@@ -107,7 +143,7 @@ export function StaggerItem({
 export function InteractiveCard({
   children,
   className = "",
-  lift = -6,
+  lift = -5,
   scale = 1.01,
   ...props
 }) {
