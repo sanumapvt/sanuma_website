@@ -66,8 +66,8 @@ export const metadata = {
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
     ],
+    shortcut: "/icon.svg",
     apple: [{ url: "/icon.svg" }],
   },
   robots: {
