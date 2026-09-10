@@ -47,7 +47,7 @@ export default function CollaboratePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      <div className="pt-28 sm:pt-28 lg:pt-32 pb-20 sm:pb-28 bg-white">
+      <div className="pt-28 sm:pt-28 md:pt-32 pb-20 sm:pb-28 bg-white">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
             {/* Left Column: Context & Direct Contact */}

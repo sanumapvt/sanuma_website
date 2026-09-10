@@ -288,7 +288,7 @@ export default function PodcastStudioExperience() {
   const progressPercent = (playbackSeconds / activeEpisode.totalSeconds) * 100;
 
   return (
-    <div className="pt-24 sm:pt-28 pb-20 sm:pb-32 bg-[#FAFBFB] relative overflow-hidden">
+    <div className="pt-28 sm:pt-28 md:pt-32 pb-20 sm:pb-32 bg-[#FAFBFB] relative overflow-hidden">
       {/* Background Decorative Studio Gradients */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-gradient-to-b from-[#009688]/12 via-[#009688]/4 to-transparent blur-3xl pointer-events-none -z-10" />
       <div className="absolute top-96 right-0 w-[500px] h-[500px] bg-[#0DF0B0]/6 blur-[120px] pointer-events-none -z-10" />

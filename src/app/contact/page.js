@@ -86,7 +86,7 @@ export default function ContactPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      <div className="pt-24 sm:pt-20 pb-20 sm:pb-28 bg-white">
+      <div className="pt-28 sm:pt-28 md:pt-32 pb-20 sm:pb-28 bg-white">
         <Container>
           {/* Main Page Header */}
           <div className="max-w-3xl mb-12 sm:mb-16">
@@ -190,10 +190,10 @@ export default function ContactPage() {
           <FadeIn direction="up">
             <section
               aria-labelledby="contact-faq-heading"
-              className="p-8 sm:p-14 rounded-3xl bg-[#F7F9F9] border border-[#E5EAEA]"
+              className="p-4 sm:p-8 md:p-14 rounded-2xl sm:rounded-3xl bg-[#F7F9F9] border border-[#E5EAEA]"
             >
-              <div className="max-w-2xl mb-10">
-                <div className="inline-flex items-center gap-2 mb-3">
+              <div className="max-w-2xl mb-5 sm:mb-8">
+                <div className="inline-flex items-center gap-2 mb-2 sm:mb-3">
                   <HelpCircle className="w-4 h-4 text-[#009688]" />
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#009688]">
                     Frequently Asked Questions
@@ -201,11 +201,11 @@ export default function ContactPage() {
                 </div>
                 <h2
                   id="contact-faq-heading"
-                  className="text-2xl sm:text-3xl font-extrabold text-[#172121]"
+                  className="text-xl sm:text-3xl font-extrabold text-[#172121]"
                 >
                   Common Questions About Connecting
                 </h2>
-                <p className="mt-2 text-sm text-[#5F6868]">
+                <p className="mt-1.5 text-xs sm:text-sm text-[#5F6868]">
                   Important context regarding collaboration, response timelines, and confidentiality.
                 </p>
               </div>

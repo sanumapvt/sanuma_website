@@ -49,7 +49,7 @@ export default function BusinessesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      <div className="pt-24 sm:pt-20 pb-20 sm:pb-28 bg-white">
+      <div className="pt-28 sm:pt-28 md:pt-32 pb-20 sm:pb-28 bg-white">
         <Container>
           {/* Header */}
           <div className="max-w-3xl mb-12 sm:mb-16">

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { SITE_CONFIG } from "@/lib/constants";
-import { ArrowRight, ArrowLeft, Sparkles, Radio } from "lucide-react";
+import { ArrowRight, ArrowLeft, Sparkles } from "lucide-react";
 import { FadeIn } from "@/components/ui/MotionReveal";
 
 // Exact original content from SITE_CONFIG.buildSteps
@@ -128,25 +128,6 @@ export default function HowWeBuild() {
         </div>
 
         {/* ========================================================================= */}
-        {/* MOBILE TELEMETRY HUD BAR (Unique futuristic indicator for phones)         */}
-        {/* ========================================================================= */}
-        <div className="flex sm:hidden items-center justify-between px-3.5 py-2 mb-3 rounded-xl bg-[#FAFBFB] border border-[#E5EAEA] shadow-2xs">
-          <div className="flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#009688] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#009688]" />
-            </span>
-            <span className="text-[10px] font-mono font-bold tracking-wider uppercase text-[#009688] flex items-center gap-1">
-              <Radio className="w-3 h-3 text-[#009688]" />
-              MAGLEV IN TRANSIT
-            </span>
-          </div>
-          <div className="text-[10px] font-mono font-bold text-[#172121]">
-            PHASE 0{activeStation + 1}/04 · {currentStep.title.toUpperCase()}
-          </div>
-        </div>
-
-        {/* ========================================================================= */}
         {/* UNIFIED RESPONSIVE RAILWAY TRACK & TRAIN (MOBILE & DESKTOP)               */}
         {/* ========================================================================= */}
         <div
@@ -154,21 +135,21 @@ export default function HowWeBuild() {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* THE ENCLOSED TRACK BED (Ergonomically tuned for Mobile & Desktop) */}
+          {/* THE ENCLOSED TRACK BED (Train and Track Centered Harmoniously) */}
           <div className="relative h-40 sm:h-44 bg-[#FAFBFB] border border-[#E5EAEA] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xs select-none">
             {/* Left & Right Tunnel Vignettes */}
             <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-[#FAFBFB] to-transparent z-30 pointer-events-none" />
             <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-[#FAFBFB] to-transparent z-30 pointer-events-none" />
 
-            {/* 1. Track Sleepers (Rail Ties Pattern) */}
-            <div className="absolute top-[82px] sm:top-[88px] left-0 right-0 h-3 sm:h-4 flex items-center justify-around pointer-events-none opacity-25">
+            {/* 1. Track Sleepers (Rail Ties Pattern - Centered on Track Line) */}
+            <div className="absolute top-[105px] sm:top-[108px] -translate-y-1/2 left-0 right-0 h-6 sm:h-7 flex items-center justify-around pointer-events-none opacity-25">
               {Array.from({ length: 44 }).map((_, i) => (
-                <div key={i} className="w-1 sm:w-1.5 h-3 sm:h-4 bg-[#5F6868] rounded-xs" />
+                <div key={i} className="w-1 sm:w-1.5 h-full bg-[#5F6868] rounded-xs" />
               ))}
             </div>
 
-            {/* 2. Dual Steel Rails + Glowing Central Maglev Rail */}
-            <div className="absolute top-[80px] sm:top-[85px] left-0 right-0 h-5 sm:h-6 flex flex-col justify-between">
+            {/* 2. Dual Steel Rails + Glowing Central Maglev Rail (Centered on Track Line) */}
+            <div className="absolute top-[105px] sm:top-[108px] -translate-y-1/2 left-0 right-0 h-5 sm:h-6 flex flex-col justify-between pointer-events-none">
               {/* Upper Steel Rail */}
               <div className="h-[2px] sm:h-[2.5px] bg-[#8A9696] shadow-xs" />
 
@@ -188,7 +169,7 @@ export default function HowWeBuild() {
             </div>
 
             {/* 3. 4 Station Docking Nodes along the Track */}
-            <div className="absolute top-2.5 sm:top-4 left-0 right-0 grid grid-cols-4 px-1.5 sm:px-4 z-20">
+            <div className="absolute top-2.5 sm:top-3.5 left-0 right-0 grid grid-cols-4 px-1.5 sm:px-4 z-20">
               {BUILD_STEPS.map((step, idx) => {
                 const isDocked = activeStation === idx;
 
@@ -215,7 +196,7 @@ export default function HowWeBuild() {
                     </div>
 
                     {/* Platform Tag */}
-                    <div className="mt-1 sm:mt-2 text-center">
+                    <div className="mt-1 sm:mt-1.5 text-center">
                       <div
                         className={`text-[9px] sm:text-[11px] font-mono font-bold tracking-wider uppercase transition-colors ${
                           isDocked ? "text-[#009688]" : "text-[#8A9696] group-hover:text-[#009688]"
@@ -236,14 +217,14 @@ export default function HowWeBuild() {
               })}
             </div>
 
-            {/* 4. THE BULLET TRAIN (Responsive sizing for Mobile & Desktop) */}
+            {/* 4. THE BULLET TRAIN (Exact Center Alignment with Track Line) */}
             <div
               style={{
                 left: `${trainPos}%`,
                 transition: isWarping ? "none" : "left 900ms cubic-bezier(0.22, 1, 0.36, 1)",
                 willChange: "left",
               }}
-              className="absolute top-[80px] sm:top-[85px] -translate-y-1/2 -translate-x-1/2 z-25 pointer-events-none"
+              className="absolute top-[105px] sm:top-[108px] -translate-y-1/2 -translate-x-1/2 z-25 pointer-events-none"
             >
               {/* Maglev Glow underneath */}
               <div className="absolute -bottom-1 left-1 sm:left-2 right-1 sm:right-2 h-2.5 sm:h-3 bg-[#0DF0B0]/60 blur-md rounded-full" />

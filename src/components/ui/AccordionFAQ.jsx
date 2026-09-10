@@ -13,16 +13,16 @@ export default function AccordionFAQ({ items = [], defaultOpenIndex = 0 }) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2.5 sm:space-y-3.5">
       {items.map((item, index) => {
         const isOpen = openIndex === index;
 
         return (
           <div
             key={index}
-            className={`rounded-2xl border overflow-hidden transition-[border-color,background-color,box-shadow] duration-200 ${
+            className={`rounded-xl sm:rounded-2xl border overflow-hidden transition-[border-color,background-color,box-shadow] duration-200 ${
               isOpen
-                ? "bg-white border-[#009688]/50 shadow-md shadow-[#009688]/5"
+                ? "bg-white border-[#009688]/50 shadow-sm shadow-[#009688]/5"
                 : "bg-white/80 border-[#E5EAEA] hover:border-[#009688]/30 hover:bg-white"
             }`}
           >
@@ -32,10 +32,10 @@ export default function AccordionFAQ({ items = [], defaultOpenIndex = 0 }) {
                 type="button"
                 onClick={() => toggleItem(index)}
                 aria-expanded={isOpen}
-                className="w-full p-6 sm:p-7 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#009688] rounded-2xl transition-colors group"
+                className="w-full py-3.5 px-4 sm:py-5 sm:px-6 text-left flex items-center justify-between gap-3 sm:gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#009688] rounded-xl sm:rounded-2xl transition-colors group"
               >
                 <span
-                  className={`text-base sm:text-lg md:text-xl font-bold transition-colors font-heading ${
+                  className={`text-[15px] sm:text-lg font-bold transition-colors font-heading leading-snug ${
                     isOpen ? "text-[#009688]" : "text-[#172121] group-hover:text-[#009688]"
                   }`}
                 >
@@ -43,13 +43,13 @@ export default function AccordionFAQ({ items = [], defaultOpenIndex = 0 }) {
                 </span>
 
                 <div
-                  className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
                     isOpen
                       ? "bg-[#009688] text-white rotate-180 shadow-xs"
                       : "bg-[#F7F9F9] text-[#5F6868] group-hover:bg-[#009688]/10 group-hover:text-[#009688]"
                   }`}
                 >
-                  <ChevronDown className="w-4 h-4 transition-transform duration-300" aria-hidden="true" />
+                  <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300" aria-hidden="true" />
                 </div>
               </button>
             </h3>
@@ -77,8 +77,8 @@ export default function AccordionFAQ({ items = [], defaultOpenIndex = 0 }) {
                   }}
                   className="overflow-hidden"
                 >
-                  <div className="px-6 pb-6 sm:px-7 sm:pb-7 pt-1 border-t border-[#E5EAEA]/60">
-                    <p className="text-sm sm:text-base text-[#5F6868] leading-relaxed">
+                  <div className="px-4 pb-4 sm:px-6 sm:pb-5 pt-1 border-t border-[#E5EAEA]/60">
+                    <p className="text-xs sm:text-sm md:text-base text-[#5F6868] leading-relaxed">
                       {item.answer}
                     </p>
                   </div>

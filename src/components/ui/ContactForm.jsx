@@ -3,15 +3,7 @@
 import { useState } from "react";
 import { Send, CheckCircle2, User, Mail, Phone, Building, MessageSquare, Sparkles } from "lucide-react";
 
-const TOPICS = [
-  "Venture Building",
-  "AI & Systems Architecture",
-  "Strategic Joint Venture",
-  "General Inquiry",
-];
-
 export default function ContactForm() {
-  const [selectedTopic, setSelectedTopic] = useState("Venture Building");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -78,35 +70,8 @@ export default function ContactForm() {
           Send a Message to Sanuma
         </h2>
         <p className="mt-2 text-sm text-[#5F6868]">
-          Select the nature of your inquiry and provide your operational details.
+          Provide your operational details and collaboration requirements below.
         </p>
-      </div>
-
-      {/* Inquiry Topic Selection Pills */}
-      <div className="mb-8">
-        <label className="block text-xs font-bold uppercase tracking-wider text-[#172121] mb-3">
-          Inquiry Purpose
-        </label>
-        <div className="grid grid-cols-2 sm:grid-cols-2 gap-2.5">
-          {TOPICS.map((topic) => {
-            const isSelected = selectedTopic === topic;
-            return (
-              <button
-                type="button"
-                key={topic}
-                onClick={() => setSelectedTopic(topic)}
-                className={`px-4 py-2.5 rounded-xl text-xs font-semibold transition-all text-left flex items-center justify-between border cursor-pointer ${
-                  isSelected
-                    ? "bg-[#009688] text-white border-[#009688] shadow-sm"
-                    : "bg-[#F7F9F9] text-[#5F6868] border-[#E5EAEA] hover:border-[#009688]/40 hover:text-[#172121]"
-                }`}
-              >
-                <span>{topic}</span>
-                {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-white ml-2" />}
-              </button>
-            );
-          })}
-        </div>
       </div>
 
       {/* Name and Email Grid */}

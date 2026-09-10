@@ -15,7 +15,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 overflow-hidden bg-[#FFFFFF]"
+      className="relative pt-36 pb-20 sm:pt-44 sm:pb-28 lg:pt-52 lg:pb-36 overflow-hidden bg-[#FFFFFF]"
       aria-label="Introduction"
     >
       {/* Full-Canvas Video Background Layer */}
