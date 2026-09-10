@@ -242,7 +242,7 @@ export default function InteractiveBusinessHub() {
         {/* ========================================================================= */}
         {/* RESPONSIVE 360° VIEW: Revolving Planetary Orbit + Clean HUD Card (Mobile + Desktop) */}
         {/* ========================================================================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 xl:gap-12 items-center">
           {/* Left 7 Columns: Continuous Revolving Planetary Orbit Canvas */}
           <div
             className="lg:col-span-7 flex flex-col items-center justify-center relative select-none w-full overflow-hidden py-2"
@@ -254,9 +254,9 @@ export default function InteractiveBusinessHub() {
             onTouchStart={() => setIsPaused(true)}
             onTouchEnd={() => setIsPaused(false)}
           >
-            {/* Responsive Scaled Orbit Canvas: 340px on mobile, 440px on sm, 540px on lg */}
-            <div className="relative w-[340px] h-[340px] sm:w-[440px] sm:h-[440px] lg:w-[540px] lg:h-[540px] flex items-center justify-center">
-              <div className="absolute w-[540px] h-[540px] scale-[0.63] sm:scale-[0.81] lg:scale-100 origin-center flex items-center justify-center">
+            {/* Responsive Scaled Orbit Canvas: Enlarged on mobile for better touch and visibility */}
+            <div className="relative w-[370px] h-[370px] sm:w-[460px] sm:h-[460px] lg:w-[540px] lg:h-[540px] max-w-[96vw] flex items-center justify-center">
+              <div className="absolute w-[540px] h-[540px] scale-[0.68] sm:scale-[0.85] lg:scale-100 origin-center flex items-center justify-center">
                 {/* Outer Subtle Orbit Guide Ring */}
                 <div className="absolute w-[490px] h-[490px] rounded-full border border-white/10 pointer-events-none opacity-40" />
 
@@ -455,8 +455,8 @@ export default function InteractiveBusinessHub() {
           </div>
         </div>
 
-          {/* Right 5 Columns: Clean, Elegant, Minimalist HUD Card */}
-          <div className="lg:col-span-5 max-w-md w-full mx-auto">
+          {/* Right 5 Columns: Compact, Sleek Minimalist HUD Card */}
+          <div className="lg:col-span-5 max-w-sm sm:max-w-md w-full mx-auto">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeDept.id}
@@ -464,7 +464,7 @@ export default function InteractiveBusinessHub() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.98 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="p-6 sm:p-7 rounded-3xl bg-[#091313]/90 border border-white/15 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.7)] relative overflow-hidden backdrop-blur-xl"
+                className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#091313]/90 border border-white/15 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.7)] relative overflow-hidden backdrop-blur-xl"
                 style={{
                   borderColor: `${activeDept.accent}35`,
                 }}
@@ -476,25 +476,25 @@ export default function InteractiveBusinessHub() {
                 />
 
                 {/* Department Header */}
-                <div className="flex items-center gap-4 mb-4">
+                <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
                   <div
-                    className="w-13 h-13 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg border"
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md border"
                     style={{
                       backgroundColor: `${activeDept.color}25`,
                       borderColor: `${activeDept.accent}45`,
                     }}
                   >
                     <ActiveIcon
-                      className="w-6 h-6"
+                      className="w-5 h-5 sm:w-6 sm:h-6"
                       style={{ color: activeDept.accent }}
                     />
                   </div>
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-tight">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight leading-snug">
                       {activeDept.name}
                     </h3>
                     <div
-                      className="text-xs font-semibold uppercase tracking-wider mt-1"
+                      className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider mt-0.5"
                       style={{ color: activeDept.accent }}
                     >
                       {activeDept.tagline}
@@ -503,18 +503,18 @@ export default function InteractiveBusinessHub() {
                 </div>
 
                 {/* Description */}
-                <p className="text-sm sm:text-[15px] text-[#F7F9F9]/80 leading-relaxed mb-6">
+                <p className="text-xs sm:text-sm text-[#F7F9F9]/80 leading-relaxed mb-3.5 sm:mb-5">
                   {activeDept.description}
                 </p>
 
                 {/* How We Build Link */}
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                <div className="pt-3 sm:pt-4 border-t border-white/10 flex items-center justify-between">
                   <Link
                     href="/how-we-build"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#00E5D0] hover:text-white transition-all group"
+                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#00E5D0] hover:text-white transition-all group"
                   >
                     <span>How We Build</span>
-                    <ArrowRight className="w-4 h-4 text-[#00E5D0] group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00E5D0] group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </motion.div>
