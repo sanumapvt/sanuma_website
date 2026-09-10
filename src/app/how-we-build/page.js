@@ -21,6 +21,7 @@ import {
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/MotionReveal";
 import AccordionFAQ from "@/components/ui/AccordionFAQ";
 import PhaseCardsList from "@/components/sections/PhaseCardsList";
+import StructuralComparison from "@/components/sections/StructuralComparison";
 export const metadata = {
   title: "How We Build Businesses | Sanuma India Private Limited",
   description:
@@ -37,28 +38,6 @@ export const metadata = {
   },
 };
 
-const COMPARISON_POINTS = [
-  {
-    aspect: "Operating Model",
-    agency: "Hourly billing, rigid project scopes, and code-and-leave mentality",
-    sanuma: "Venture co-building, long-term alignment, and direct operating responsibility",
-  },
-  {
-    aspect: "Systemization",
-    agency: "Delivers isolated code without defining internal business SOPs",
-    sanuma: "Codifies full repeatable operating systems so the business runs predictably",
-  },
-  {
-    aspect: "AI Integration",
-    agency: "Superficial chatbots or third-party wrappers attached as an afterthought",
-    sanuma: "Deeply embedded AI decision pipelines built into core operational workflows",
-  },
-  {
-    aspect: "Scalability Focus",
-    agency: "Scope stops at software delivery; no responsibility for commercial scale",
-    sanuma: "Engineered specifically for unit-economic durability and multi-region scale",
-  },
-];
 
 const HOW_WE_BUILD_FAQS = [
   {
@@ -182,36 +161,7 @@ export default function HowWeBuildPage() {
                 </p>
               </div>
 
-              <div className="overflow-hidden rounded-3xl border border-[#E5EAEA] bg-white shadow-xs">
-                <div className="grid grid-cols-1 md:grid-cols-12 bg-[#F7F9F9] border-b border-[#E5EAEA] p-5 sm:p-6 text-xs font-bold uppercase tracking-wider text-[#172121]">
-                  <div className="md:col-span-3">Dimension</div>
-                  <div className="md:col-span-4 text-[#5F6868]">Traditional IT Agency</div>
-                  <div className="md:col-span-5 text-[#009688]">Sanuma Business Building</div>
-                </div>
-
-                <div className="divide-y divide-[#E5EAEA]">
-                  {COMPARISON_POINTS.map((item) => (
-                    <div key={item.aspect} className="grid grid-cols-1 md:grid-cols-12 p-5 sm:p-6 gap-3 sm:gap-4 items-center">
-                      <div className="md:col-span-3 font-bold text-[#172121] text-sm sm:text-base">
-                        {item.aspect}
-                      </div>
-                      <div className="md:col-span-4 text-sm text-[#5F6868]">
-                        <span className="md:hidden font-semibold text-xs text-[#5F6868] block mb-1">Traditional Agency:</span>
-                        {item.agency}
-                      </div>
-                      <div className="md:col-span-5 text-sm sm:text-base font-medium text-[#172121] flex items-start gap-2.5">
-                        <div className="w-5 h-5 rounded-full bg-[#009688]/10 text-[#009688] flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <Check className="w-3 h-3 stroke-[2.5]" />
-                        </div>
-                        <div>
-                          <span className="md:hidden font-semibold text-xs text-[#009688] block mb-1">Sanuma Approach:</span>
-                          {item.sanuma}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <StructuralComparison />
             </FadeIn>
           </section>
 

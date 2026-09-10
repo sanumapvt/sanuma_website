@@ -18,58 +18,33 @@ export default function Hero() {
       className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 lg:pt-48 lg:pb-36 overflow-hidden bg-[#FFFFFF]"
       aria-label="Introduction"
     >
-      {/* Ambient Breathing Gradient Orb for modern tech elegance */}
-      <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.08, 0.16, 0.08],
-          x: [0, 20, 0],
-          y: [0, -20, 0],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 10,
-          ease: "easeInOut",
-        }}
-        className="absolute top-1/4 -right-20 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-[#009688] to-[#004D40] blur-3xl pointer-events-none -z-10"
-        aria-hidden="true"
-      />
+      {/* Full-Canvas Video Background Layer */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="w-full h-full object-cover"
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
 
-      <motion.div
-        animate={{
-          scale: [1.1, 1, 1.1],
-          opacity: [0.04, 0.09, 0.04],
-          x: [0, -15, 0],
-          y: [0, 15, 0],
-        }}
-        transition={{
-          repeat: Infinity,
-          duration: 12,
-          ease: "easeInOut",
-        }}
-        className="absolute bottom-10 -left-20 w-[420px] h-[420px] rounded-full bg-gradient-to-tr from-[#009688] to-[#80CBC4] blur-3xl pointer-events-none -z-10"
-        aria-hidden="true"
-      />
+        </video>
 
-      {/* Subtle architectural grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.035] pointer-events-none"
-        style={{
-          backgroundImage: `radial-gradient(#172121 1px, transparent 1px)`,
-          backgroundSize: "32px 32px",
-        }}
-        aria-hidden="true"
-      />
+        {/* Directional Contrast Overlay: Keeps video vibrant on right while providing crisp white backdrop for left text */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 md:via-white/60 to-white/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/30" />
+      </div>
 
-      <Container className="relative">
+      <Container className="relative z-10">
         <div className="max-w-4xl">
-
           {/* Primary Headline (H1) with smooth spring reveal */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-[80px] font-extrabold tracking-tight text-[#172121] leading-[1.08] mb-6 sm:mb-8"
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-[80px] font-extrabold tracking-tight text-[#172121] leading-[1.08] mb-6 sm:mb-8 drop-shadow-xs"
           >
             We build world-class{" "}
             <span className="text-[#009688] relative inline-block">
@@ -85,12 +60,12 @@ export default function Hero() {
             </span>
           </motion.h1>
 
-          {/* Core Subtext */}
+          {/* Core Subtext with high-contrast text */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="text-lg sm:text-xl lg:text-2xl text-[#5F6868] leading-relaxed max-w-2xl mb-10 sm:mb-12 font-normal"
+            className="text-lg sm:text-xl lg:text-2xl text-[#1F2937] leading-relaxed max-w-2xl mb-10 sm:mb-12 font-medium"
           >
             Sanuma builds and scales businesses using systems, processes, AI
             and technology.
@@ -116,7 +91,7 @@ export default function Hero() {
               href="/collaborate"
               variant="ghost"
               size="lg"
-              className="group hover:bg-[#F7F9F9] transition-all duration-300"
+              className="group bg-white/90 hover:bg-white border border-[#E5EAEA] hover:border-[#009688] text-[#172121] hover:text-[#009688] shadow-xs transition-all duration-300 backdrop-blur-xs"
             >
               <span>Work With Us</span>
               <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
