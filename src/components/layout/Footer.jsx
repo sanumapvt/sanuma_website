@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="md:col-span-5 flex flex-col items-start">
             <Link href="/" className="inline-flex items-center group mb-4" aria-label="Sanuma Home">
               <img
-                src="/logo.png"
+                src="/footerlogo.png"
                 alt="Sanuma India Private Limited"
                 className="h-7 sm:h-8 w-auto object-contain transition-opacity hover:opacity-90"
               />
@@ -24,12 +24,12 @@ export default function Footer() {
             </p>
             <p className="text-sm text-[#5F6868] max-w-sm leading-relaxed mb-4">
               An AI and technology-driven business-building company based in
-              Ahmedabad. Founded in {SITE_CONFIG.foundingYear} by {SITE_CONFIG.founder} to create, develop,
+              Ahmedabad, India. Founded in {SITE_CONFIG.foundingYear} to create, develop,
               and scale companies through strategy, operating systems, and precision execution.
             </p>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F7F9F9] border border-[#E5EAEA] text-xs font-medium text-[#5F6868]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#009688]" aria-hidden="true" />
-              Ahmedabad, Gujarat, India
+              Ahmedabad, India
             </div>
           </div>
 
@@ -95,9 +95,6 @@ export default function Footer() {
         {/* Bottom copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#5F6868]">
           <p>© {currentYear} {SITE_CONFIG.legalName}. All rights reserved.</p>
-          <p className="text-[#5F6868]/80">
-            Systems · Processes · AI · Technology · Ahmedabad, India
-          </p>
         </div>
       </Container>
     </footer>

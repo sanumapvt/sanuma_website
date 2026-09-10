@@ -1,26 +1,60 @@
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
-import Button from "@/components/ui/Button";
 import { SITE_CONFIG } from "@/lib/constants";
 import { getBreadcrumbSchema, getOrganizationSchema, getWebPageSchema } from "@/lib/schema";
-import { Mail, Phone, MapPin, ArrowRight, Building2 } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  ShieldCheck,
+  ArrowRight,
+  Sparkles,
+  ArrowUpRight,
+  HelpCircle,
+} from "lucide-react";
 import { FadeIn } from "@/components/ui/MotionReveal";
+import ContactForm from "@/components/ui/ContactForm";
+import AccordionFAQ from "@/components/ui/AccordionFAQ";
 
 export const metadata = {
-  title: "Contact Sanuma India Private Limited",
+  title: "Contact Sanuma India Private Limited | Ahmedabad, India",
   description:
-    "Contact Sanuma India Private Limited in Ahmedabad, Gujarat, India. Inquire about venture building, scaling, AI systems, and strategic partnerships.",
+    "Contact Sanuma India Private Limited in Ahmedabad, India. Inquire about venture building, scaling, AI systems, and strategic partnerships.",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
-    title: "Contact Sanuma India Private Limited",
+    title: "Contact Sanuma India Private Limited | Ahmedabad, India",
     description:
-      "Connect with Sanuma India Private Limited in Ahmedabad, Gujarat, India.",
+      "Connect with our leadership team in Ahmedabad, India for business partnerships, venture development, and AI engineering.",
     url: `${SITE_CONFIG.url}/contact`,
     type: "website",
   },
 };
+
+const CONTACT_FAQS = [
+  {
+    question: "What is the typical response timeline for new inquiries?",
+    answer:
+      "Our executive team in Ahmedabad reviews all inquiries directly. You will receive a personalized response within 24 business hours.",
+  },
+  {
+    question: "Do you sign non-disclosure agreements (NDAs) before discussions?",
+    answer:
+      "Yes. For proprietary venture discussions, technological architecture, or joint-venture opportunities, we are pleased to execute mutual NDAs prior to in-depth meetings.",
+  },
+  {
+    question: "Can we meet the Sanuma team in person?",
+    answer:
+      "Yes. In-person meetings are hosted at our registered headquarters in Ahmedabad, India by prior appointment.",
+  },
+  {
+    question: "How does Sanuma evaluate new venture opportunities?",
+    answer:
+      "We evaluate projects based on unit economics feasibility, addressable market whitespace, technological defensibility, and alignment with our 4-stage lifecycle (Idea → Build → Systemize → Scale).",
+  },
+];
 
 export default function ContactPage() {
   const breadcrumbs = [
@@ -31,9 +65,9 @@ export default function ContactPage() {
   const breadcrumbSchema = getBreadcrumbSchema(breadcrumbs);
   const localBusinessSchema = getOrganizationSchema();
   const webPageSchema = getWebPageSchema({
-    title: "Contact Sanuma India Private Limited",
+    title: "Contact Sanuma India Private Limited | Ahmedabad, India",
     description:
-      "Contact Sanuma India Private Limited in Ahmedabad, Gujarat, India.",
+      "Contact Sanuma India Private Limited in Ahmedabad, India.",
     url: `${SITE_CONFIG.url}/contact`,
   });
 
@@ -52,136 +86,132 @@ export default function ContactPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      <div className="pt-32 sm:pt-40 pb-24 sm:pb-32 bg-white">
+      <div className="pt-24 sm:pt-20 pb-20 sm:pb-28 bg-white">
         <Container>
-          {/* Main Page Header (H1) */}
-          <div className="max-w-3xl mb-16 sm:mb-20">
+          {/* Main Page Header */}
+          <div className="max-w-3xl mb-12 sm:mb-16">
             <FadeIn direction="up">
-              <SectionHeading
-                as="h1"
-                label="Contact"
-                title="Contact Sanuma India Private Limited"
-                subtitle="Connect with our leadership team in Ahmedabad for business partnerships, venture development, media inquiries, or institutional collaboration."
-              />
+              <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#172121] leading-tight mb-6">
+                Let&apos;s build something <span className="text-[#009688]">meaningful.</span>
+              </h1>
+              <p className="text-lg sm:text-xl text-[#5F6868] leading-relaxed">
+                Connect with our team in Ahmedabad, India for venture building, AI operating
+                systems, technology architecture, or strategic commercial partnerships.
+              </p>
             </FadeIn>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
-            {/* Main Contact Details with Semantic Address */}
+          {/* Core Content Grid: Form (Left) + Executive Support Details (Right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start mb-24 sm:mb-32">
+            {/* Left Column: Interactive Contact Form */}
             <FadeIn direction="up" delay={0.1} className="lg:col-span-7">
-              <address className="not-italic space-y-6">
-                {/* Email Card */}
-                <div className="p-8 rounded-2xl bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/40 hover:bg-white hover:shadow-sm transition-all duration-200">
-                  <div className="w-10 h-10 rounded-xl bg-[#009688]/10 text-[#009688] flex items-center justify-center mb-4">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#5F6868] mb-1">
-                    Corporate Email
-                  </div>
-                  <a
-                    href={`mailto:${SITE_CONFIG.contact.email}`}
-                    className="text-xl sm:text-2xl font-bold text-[#172121] hover:text-[#009688] transition-colors break-all"
-                  >
-                    {SITE_CONFIG.contact.email}
-                  </a>
-                  <p className="mt-2 text-sm text-[#5F6868]">
-                    For official inquiries, business building proposals, and partnerships.
-                  </p>
-                </div>
-
-                {/* Phone Card */}
-                <div className="p-8 rounded-2xl bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/40 hover:bg-white hover:shadow-sm transition-all duration-200">
-                  <div className="w-10 h-10 rounded-xl bg-[#009688]/10 text-[#009688] flex items-center justify-center mb-4">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#5F6868] mb-1">
-                    Direct Line
-                  </div>
-                  <a
-                    href={`tel:${SITE_CONFIG.contact.phoneClean}`}
-                    className="text-xl sm:text-2xl font-bold text-[#172121] hover:text-[#009688] transition-colors"
-                  >
-                    {SITE_CONFIG.contact.phone}
-                  </a>
-                  <p className="mt-2 text-sm text-[#5F6868]">
-                    Operating hours: Monday through Friday, 9:30 AM – 6:30 PM IST.
-                  </p>
-                </div>
-
-                {/* Location Card */}
-                <div className="p-8 rounded-2xl bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/40 hover:bg-white hover:shadow-sm transition-all duration-200">
-                  <div className="w-10 h-10 rounded-xl bg-[#009688]/10 text-[#009688] flex items-center justify-center mb-4">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#5F6868] mb-1">
-                    Registered Headquarters
-                  </div>
-                  <div className="text-xl sm:text-2xl font-bold text-[#172121]">
-                    {SITE_CONFIG.contact.address}
-                  </div>
-                  <p className="mt-2 text-sm text-[#5F6868]">
-                    Corporate registry and executive operations in Ahmedabad, Gujarat, India.
-                  </p>
-                </div>
-              </address>
+              <ContactForm />
             </FadeIn>
 
-            {/* Right Column: Entity Summary & Direct Action */}
-            <FadeIn direction="up" delay={0.2} className="lg:col-span-5 h-full">
-              <div className="h-full flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-[#172121] text-white shadow-xl shadow-black/5">
-                <div>
-                  <div className="w-10 h-10 rounded-xl bg-[#009688]/20 text-[#009688] flex items-center justify-center mb-6">
-                    <Building2 className="w-5 h-5" />
-                  </div>
-                  <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#009688] mb-2">
-                    Corporate Entity
-                  </div>
-                  <h2 className="text-2xl font-bold text-white mb-4">
-                    {SITE_CONFIG.legalName}
-                  </h2>
-                  <p className="text-sm text-[#F7F9F9]/80 leading-relaxed mb-6">
-                    An Indian Private Limited entity incorporated in {SITE_CONFIG.foundingYear} to build, develop,
-                    and scale modern businesses using artificial intelligence and
-                    scalable operating architectures.
-                  </p>
+            {/* Right Column: Executive Contact & Headquarters Information */}
+            <FadeIn direction="up" delay={0.2} className="lg:col-span-5 space-y-6">
+              {/* Direct Channels Card */}
+              <div className="p-8 rounded-3xl bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/30 transition-all">
+                <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#009688] mb-5 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#009688]" />
+                  <span>Direct Communication</span>
+                </div>
 
-                  <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-xs text-[#F7F9F9]/70 space-y-2 mb-8">
-                    <div className="flex justify-between">
-                      <span>Structure:</span>
-                      <span className="font-semibold text-white">Private Limited</span>
+                <div className="space-y-6">
+                  {/* Email */}
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-[#5F6868] mb-1">
+                      Corporate Inquiries
                     </div>
-                    <div className="flex justify-between">
-                      <span>Founder:</span>
-                      <span className="font-semibold text-white">{SITE_CONFIG.founder}</span>
+                    <a
+                      href={`mailto:${SITE_CONFIG.contact.email}`}
+                      className="text-lg sm:text-xl font-bold text-[#172121] hover:text-[#009688] transition-colors break-all"
+                    >
+                      {SITE_CONFIG.contact.email}
+                    </a>
+                  </div>
+
+                  {/* Phone */}
+                  <div className="pt-4 border-t border-[#E5EAEA]">
+                    <div className="text-xs font-semibold uppercase tracking-wider text-[#5F6868] mb-1">
+                      Telephone Support
                     </div>
-                    <div className="flex justify-between">
-                      <span>Location:</span>
-                      <span className="font-semibold text-white">Ahmedabad, Gujarat, India</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Domain:</span>
-                      <span className="font-semibold text-white">sanuma.co.in</span>
+                    <a
+                      href={`tel:${SITE_CONFIG.contact.phoneClean}`}
+                      className="text-lg sm:text-xl font-bold text-[#172121] hover:text-[#009688] transition-colors"
+                    >
+                      {SITE_CONFIG.contact.phone}
+                    </a>
+                    <div className="flex items-center gap-1.5 text-xs text-[#5F6868] mt-1">
+                      <Clock className="w-3.5 h-3.5 text-[#009688]" />
+                      <span>Mon – Fri, 9:30 AM – 6:30 PM IST</span>
                     </div>
                   </div>
                 </div>
+              </div>
 
+              {/* Headquarters Card */}
+              <div className="p-8 rounded-3xl bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/30 transition-all">
+                <div className="text-xs font-bold uppercase tracking-[0.2em] text-[#009688] mb-5 flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-[#009688]" />
+                  <span>Headquarters</span>
+                </div>
+
+                <h2 className="text-xl font-bold text-[#172121] mb-1">
+                  {SITE_CONFIG.legalName}
+                </h2>
+                <div className="text-sm font-semibold text-[#009688] mb-3">
+                  Ahmedabad, India
+                </div>
+                <p className="text-sm text-[#5F6868] leading-relaxed">
+                  Corporate registry and executive operations in Ahmedabad, India.
+                </p>
+              </div>
+
+              {/* Enterprise Response Guarantee Banner */}
+              <div className="p-6 rounded-2xl bg-[#172121] text-white flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-[#009688]/20 text-[#009688] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <ShieldCheck className="w-5 h-5 text-[#009688]" />
+                </div>
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-wider text-white/60 mb-3">
-                    Have a venture to build?
+                  <div className="text-sm font-bold text-white mb-1">
+                    24-Hour Response Commitment
                   </div>
-                  <Button
-                    href="/collaborate"
-                    variant="primary"
-                    size="md"
-                    className="w-full"
-                  >
-                    <span>Build &amp; Scale with Sanuma</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
+                  <p className="text-xs text-[#F7F9F9]/80 leading-relaxed">
+                    Every message is routed directly to relevant engineering and strategy leads
+                    without intermediate bureaucracy.
+                  </p>
                 </div>
               </div>
             </FadeIn>
           </div>
+
+          {/* Direct Q&A / FAQs Section */}
+          <FadeIn direction="up">
+            <section
+              aria-labelledby="contact-faq-heading"
+              className="p-8 sm:p-14 rounded-3xl bg-[#F7F9F9] border border-[#E5EAEA]"
+            >
+              <div className="max-w-2xl mb-10">
+                <div className="inline-flex items-center gap-2 mb-3">
+                  <HelpCircle className="w-4 h-4 text-[#009688]" />
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#009688]">
+                    Frequently Asked Questions
+                  </span>
+                </div>
+                <h2
+                  id="contact-faq-heading"
+                  className="text-2xl sm:text-3xl font-extrabold text-[#172121]"
+                >
+                  Common Questions About Connecting
+                </h2>
+                <p className="mt-2 text-sm text-[#5F6868]">
+                  Important context regarding collaboration, response timelines, and confidentiality.
+                </p>
+              </div>
+              <AccordionFAQ items={CONTACT_FAQS} />
+            </section>
+          </FadeIn>
         </Container>
       </div>
     </>

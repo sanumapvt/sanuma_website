@@ -51,7 +51,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: "/icon.svg",
+        url: "/logo.png",
         width: 512,
         height: 512,
         alt: "Sanuma India Private Limited Logo",
@@ -62,14 +62,14 @@ export const metadata = {
     card: "summary_large_image",
     title: "Sanuma | Business Building, AI & Technology",
     description: SITE_CONFIG.description,
-    images: ["/icon.svg"],
+    images: ["/logo.png"],
   },
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png" },
     ],
-    shortcut: "/icon.svg",
-    apple: [{ url: "/icon.svg" }],
+    shortcut: "/favicon.png",
+    apple: [{ url: "/favicon.png" }],
   },
   robots: {
     index: true,

@@ -12,19 +12,13 @@ export function getOrganizationSchema() {
     alternateName: SITE_CONFIG.name,
     legalName: SITE_CONFIG.legalName,
     url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/icon.svg`,
-    image: `${SITE_CONFIG.url}/icon.svg`,
+    logo: `${SITE_CONFIG.url}/logo.png`,
+    image: `${SITE_CONFIG.url}/logo.png`,
     description: SITE_CONFIG.description,
     foundingDate: `${SITE_CONFIG.foundingYear}-01-01`,
-    founder: {
-      "@type": "Person",
-      name: SITE_CONFIG.founder,
-      jobTitle: "Founder & Managing Director",
-    },
     address: {
       "@type": "PostalAddress",
       addressLocality: SITE_CONFIG.contact.addressLocality,
-      addressRegion: SITE_CONFIG.contact.addressRegion,
       addressCountry: SITE_CONFIG.contact.addressCountry,
     },
     geo: {

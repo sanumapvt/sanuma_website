@@ -5,16 +5,16 @@ import { motion } from "framer-motion";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { BUSINESSES } from "@/data/businesses";
-import { ArrowUpRight, ShieldCheck, MapPin } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/MotionReveal";
 
 export default function Businesses() {
   const hasBusinesses = BUSINESSES.length > 0;
 
   return (
-    <section id="businesses" className="py-24 sm:py-32 bg-[#FFFFFF] relative overflow-hidden" aria-label="Businesses Portfolio">
+    <section id="businesses" className="py-14 sm:py-20 bg-[#FFFFFF] relative overflow-hidden" aria-label="Businesses Portfolio">
       <Container>
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 sm:mb-20">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 sm:mb-14">
           <FadeIn direction="up">
             <SectionHeading
               label="Portfolio"
@@ -42,50 +42,35 @@ export default function Businesses() {
 
         {hasBusinesses ? (
           <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {BUSINESSES.slice(0, 3).map((biz) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+              {BUSINESSES.map((biz) => (
                 <div
                   key={biz.name}
-                  className="p-7 rounded-2xl bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/40 hover:bg-white hover:shadow-md hover:shadow-black/[0.02] transition-all duration-300 flex flex-col justify-between group"
+                  className="p-6 rounded-2xl bg-[#F7F9F9] border border-[#E5EAEA] hover:border-[#009688]/40 hover:bg-white hover:shadow-md hover:shadow-black/[0.02] transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     {/* Logo + Name */}
-                    <div className="flex items-center gap-3.5 mb-4">
+                    <div className="flex items-center gap-3 mb-3">
                       <div
-                        className={`w-11 h-11 rounded-xl bg-gradient-to-br ${biz.monogramColor} text-white font-extrabold text-sm flex items-center justify-center tracking-wider shadow-xs flex-shrink-0 group-hover:scale-105 transition-transform`}
+                        className={`w-10 h-10 rounded-xl bg-gradient-to-br ${biz.monogramColor} text-white font-extrabold text-sm flex items-center justify-center tracking-wider shadow-xs flex-shrink-0 group-hover:scale-105 transition-transform`}
                       >
                         {biz.monogram}
                       </div>
-                      <h3 className="text-xl font-bold text-[#172121] group-hover:text-[#009688] transition-colors leading-snug">
+                      <h3 className="text-lg font-bold text-[#172121] group-hover:text-[#009688] transition-colors leading-snug">
                         {biz.name}
                       </h3>
                     </div>
 
-                    {/* 2-line Description */}
-                    <p className="text-sm text-[#5F6868] line-clamp-2 leading-relaxed">
+                    {/* Description */}
+                    <p className="text-xs text-[#5F6868] line-clamp-3 leading-relaxed">
                       {biz.description}
                     </p>
-                  </div>
-
-                  {/* Location */}
-                  <div className="mt-6 pt-4 border-t border-[#E5EAEA] flex items-center justify-between text-xs text-[#5F6868]">
-                    <span className="flex items-center gap-1.5 font-medium">
-                      <MapPin className="w-3.5 h-3.5 text-[#009688]" />
-                      {biz.location}
-                    </span>
-                    <Link
-                      href="/businesses"
-                      className="text-[#009688] font-semibold inline-flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <span>Explore</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </Link>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-12 text-center">
+            <div className="mt-10 text-center">
               <Link
                 href="/businesses"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#F7F9F9] hover:bg-white border border-[#E5EAEA] hover:border-[#009688]/40 text-sm font-semibold text-[#172121] hover:text-[#009688] transition-all shadow-xs"

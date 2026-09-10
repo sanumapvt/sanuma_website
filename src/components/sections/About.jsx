@@ -31,7 +31,7 @@ export default function About() {
             />
             <p className="mt-6 text-base sm:text-lg text-[#5F6868] leading-relaxed">
               We are not a traditional IT services shop, agency, or consultancy.
-              Sanuma is an active, hands-on business-building company based in Ahmedabad, Gujarat.
+              Sanuma is an active, hands-on business-building company based in Ahmedabad, India.
             </p>
             <motion.div
               whileHover={{ scale: 1.02 }}

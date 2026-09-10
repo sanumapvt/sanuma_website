@@ -3,12 +3,11 @@ export const SITE_CONFIG = {
   brandName: "SANUMA",
   legalName: "Sanuma India Private Limited",
   url: "https://sanuma.co.in",
-  founder: "Pranshu Maheshwari",
   foundingYear: "2021",
   tagline: "We build world-class companies.",
   headline: "Building world-class companies through systems, processes, AI and technology.",
   description:
-    "Sanuma is an AI and technology-driven business-building company in Ahmedabad that creates, develops and scales businesses using strategy, systems, processes, AI and technology.",
+    "Sanuma is an AI and technology-driven business-building company in Ahmedabad, India that creates, develops and scales businesses using strategy, systems, processes, AI and technology.",
   shortDescription:
     "Sanuma builds and scales businesses using systems, processes, AI and technology.",
   contact: {
@@ -16,13 +15,11 @@ export const SITE_CONFIG = {
     phone: "+91 92653 06138",
     phoneClean: "+919265306138",
     city: "Ahmedabad",
-    region: "Gujarat",
     country: "India",
     countryCode: "IN",
     postalCode: "380015",
-    address: "Ahmedabad, Gujarat, India",
+    address: "Ahmedabad, India",
     addressLocality: "Ahmedabad",
-    addressRegion: "Gujarat",
     addressCountry: "IN",
   },
   keywords: [
@@ -37,7 +34,6 @@ export const SITE_CONFIG = {
     "AI powered business development",
     "Sanuma India Private Limited",
     "Sanuma Ahmedabad",
-    "Pranshu Maheshwari Sanuma",
   ],
   pillars: [
     {
@@ -123,4 +119,5 @@ export const NAV_LINKS = [
   { label: "How We Build", href: "/how-we-build" },
   { label: "Collaborate", href: "/collaborate" },
   { label: "Contact", href: "/contact" },
+  { label: "Podcast", href: "/podcast" },
 ];

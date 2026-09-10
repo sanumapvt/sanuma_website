@@ -14,7 +14,6 @@ import {
   HelpCircle,
   Building2,
   Calendar,
-  User,
   MapPin,
 } from "lucide-react";
 import AccordionFAQ from "@/components/ui/AccordionFAQ";
@@ -23,7 +22,7 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/MotionRev
 export const metadata = {
   title: "About Sanuma | Business Building Company in Ahmedabad",
   description:
-    "Founded in 2021 by Pranshu Maheshwari in Ahmedabad, Sanuma India Private Limited is an AI & technology-driven business-building company combining strategy, systems, and execution.",
+    "Founded in 2021 in Ahmedabad, India, Sanuma India Private Limited is an AI & technology-driven business-building company combining strategy, systems, and execution.",
   alternates: {
     canonical: "/about",
   },
@@ -54,7 +53,7 @@ export default function AboutPage() {
   const webPageSchema = getWebPageSchema({
     title: "About Sanuma | Business Building Company in Ahmedabad",
     description:
-      "Sanuma is an AI and technology-driven business-building company founded in 2021 in Ahmedabad by Pranshu Maheshwari.",
+      "Sanuma is an AI and technology-driven business-building company founded in 2021 in Ahmedabad, India.",
     url: `${SITE_CONFIG.url}/about`,
   });
 
@@ -74,10 +73,10 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      <div className="pt-32 sm:pt-40 pb-24 sm:pb-32 bg-white">
+      <div className="pt-24 sm:pt-20 pb-20 sm:pb-28 bg-white">
         <Container>
           {/* Main Page Header (H1) */}
-          <div className="max-w-3xl mb-16 sm:mb-20">
+          <div className="max-w-3xl mb-12 sm:mb-16">
             <FadeIn direction="up">
               <SectionHeading
                 as="h1"
@@ -90,7 +89,7 @@ export default function AboutPage() {
 
           {/* GEO Entity Facts / Transparency Signals */}
           <FadeIn direction="up" delay={0.1}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 py-6 border-t border-b border-[#E5EAEA] mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 py-6 border-t border-b border-[#E5EAEA] mb-16">
               <div className="flex items-start gap-3">
                 <Building2 className="w-4 h-4 text-[#009688] mt-1 flex-shrink-0" />
                 <div>
@@ -116,25 +115,13 @@ export default function AboutPage() {
               </div>
 
               <div className="flex items-start gap-3">
-                <User className="w-4 h-4 text-[#009688] mt-1 flex-shrink-0" />
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-[#5F6868]">
-                    Founder
-                  </div>
-                  <div className="text-sm sm:text-base font-bold text-[#172121]">
-                    {SITE_CONFIG.founder}
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#009688] mt-1 flex-shrink-0" />
                 <div>
                   <div className="text-xs font-semibold uppercase tracking-wider text-[#5F6868]">
                     Headquarters
                   </div>
                   <div className="text-sm sm:text-base font-bold text-[#172121]">
-                    Ahmedabad, Gujarat
+                    Ahmedabad, India
                   </div>
                 </div>
               </div>
@@ -164,7 +151,7 @@ export default function AboutPage() {
                   development of our ventures.
                 </p>
                 <p>
-                  Headquartered in Ahmedabad, Gujarat, we combine high-level
+                  Headquartered in Ahmedabad, India, we combine high-level
                   business strategy with deep AI automation and enterprise software
                   architecture. Every system we design is built to eliminate manual
                   inefficiencies and allow businesses to achieve reliable,

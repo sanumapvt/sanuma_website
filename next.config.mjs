@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: "/favicon.ico",
-        destination: "/icon.svg",
+        destination: "/favicon.png",
       },
     ];
   },

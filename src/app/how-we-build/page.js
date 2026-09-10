@@ -24,7 +24,7 @@ import PhaseCardsList from "@/components/sections/PhaseCardsList";
 export const metadata = {
   title: "How We Build Businesses | Sanuma India Private Limited",
   description:
-    "Explore Sanuma's 4-stage business-building lifecycle: Idea, Build, Systemize, and Scale. We combine business strategy, robust systems, AI automation, and enterprise engineering in Ahmedabad, Gujarat.",
+    "Explore Sanuma's 4-stage business-building lifecycle: Idea, Build, Systemize, and Scale. We combine business strategy, robust systems, AI automation, and enterprise engineering in Ahmedabad, India.",
   alternates: {
     canonical: "/how-we-build",
   },
@@ -114,15 +114,11 @@ export default function HowWeBuildPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      <div className="pt-32 sm:pt-40 pb-24 sm:pb-32 bg-white">
+      <div className="pt-24 sm:pt-20 pb-20 sm:pb-28 bg-white">
         <Container>
           {/* Header Section */}
-          <div className="max-w-4xl mb-16 sm:mb-20">
+          <div className="max-w-4xl mb-12 sm:mb-16">
             <FadeIn direction="up">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7F9F9] border border-[#E5EAEA] text-xs font-semibold uppercase tracking-[0.2em] text-[#009688] mb-6">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Our Proprietary Methodology</span>
-              </div>
               <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#172121] leading-tight mb-6">
                 From idea to <span className="text-[#009688]">scale.</span>
               </h1>

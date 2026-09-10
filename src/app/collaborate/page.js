@@ -47,9 +47,9 @@ export default function CollaboratePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
-      <div className="pt-32 sm:pt-40 pb-24 sm:pb-32 bg-white">
+      <div className="pt-24 sm:pt-20 pb-20 sm:pb-28 bg-white">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
             {/* Left Column: Context & Direct Contact */}
             <FadeIn direction="up" className="lg:col-span-5">
               <SectionHeading
@@ -112,8 +112,8 @@ export default function CollaboratePage() {
 
             {/* Right Column: Interactive Collaboration Form */}
             <FadeIn direction="up" delay={0.15} className="lg:col-span-7">
-              <div className="p-8 sm:p-12 rounded-3xl bg-[#F7F9F9] border border-[#E5EAEA] shadow-sm">
-                <div className="mb-8">
+              <div className="p-5 sm:p-8 lg:p-10 rounded-3xl bg-[#F7F9F9] border border-[#E5EAEA] shadow-sm">
+                <div className="mb-6 sm:mb-8">
                   <h2 className="text-xl sm:text-2xl font-bold text-[#172121]">
                     Tell us about your venture or proposal
                   </h2>

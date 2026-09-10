@@ -50,7 +50,7 @@ export default function CollaborateForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-8 sm:p-12 rounded-3xl bg-[#F7F9F9] border border-[#E5EAEA] shadow-[0_2px_16px_-4px_rgba(0,0,0,0.03)]"
+      className="space-y-6"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
         <div>

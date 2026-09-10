@@ -3,51 +3,51 @@
  */
 export const BUSINESSES = [
   {
-    name: "NeuroScale AI",
-    monogram: "NS",
+    name: "Robuzta",
+    shortName: "Robuzta",
+    monogram: "RB",
     monogramColor: "from-[#009688] to-[#00695C]",
+    website: "https://robuzta.com",
+    displayUrl: "robuzta.com",
+    category: "Device Engineering & Chip-Level Techlabs",
     description:
-      "Autonomous supply chain telemetry and predictive route optimization platform for enterprise logistics networks across India.",
+      "Multi-brand premium electronics and enterprise device repair ecosystem specializing in chip-level engineering, Apple & Microsoft Surface servicing, and doorstep tech support.",
     location: "Ahmedabad, India",
   },
   {
-    name: "KaryaGrid",
-    monogram: "KG",
-    monogramColor: "from-[#172121] to-[#2E3C3C]",
+    name: "Dronebhai",
+    shortName: "Dronebhai",
+    monogram: "DB",
+    monogramColor: "from-[#172121] to-[#009688]",
+    website: "https://dronebhai.com",
+    displayUrl: "dronebhai.com",
+    category: "UAV Systems, FPV & Drone Technology",
     description:
-      "Industrial operations SaaS that codifies manufacturing standard operating procedures and digitizes factory-floor telemetry.",
+      "India's premier drone ecosystem delivering authentic DJI enterprise platforms, custom industrial UAV manufacturing, precision agricultural drones, and certified technical servicing.",
     location: "Ahmedabad, India",
   },
   {
-    name: "FinVeda Tech",
-    monogram: "FV",
-    monogramColor: "from-[#00796B] to-[#004D40]",
+    name: "Umyra D' Studio",
+    shortName: "Umyra",
+    monogram: "UD",
+    monogramColor: "from-[#7C3AED] to-[#4F46E5]",
+    website: null,
+    displayUrl: null,
+    category: "Bespoke Design, Couture & Creative Studio",
     description:
-      "High-throughput commercial reconciliation and automated multi-branch invoice settlement infrastructure for distribution chains.",
+      "High-end bespoke design, creative couture, and aesthetic curation crafting distinctive lifestyle collections, bridal elegance, and contemporary bespoke wear.",
     location: "Ahmedabad, India",
   },
   {
-    name: "LogiSphere India",
-    monogram: "LS",
-    monogramColor: "from-[#00897B] to-[#172121]",
+    name: "Rover & Roads",
+    shortName: "Rover & Roads",
+    monogram: "RR",
+    monogramColor: "from-[#2E3C3C] to-[#172121]",
+    website: null,
+    displayUrl: null,
+    category: "Experiential Mobility & Overland Travel",
     description:
-      "Intelligent freight exchange and multi-modal fleet coordination connecting industrial manufacturing corridors with retail centers.",
-    location: "Ahmedabad, India",
-  },
-  {
-    name: "CogniDesk",
-    monogram: "CD",
-    monogramColor: "from-[#009688] to-[#26A69A]",
-    description:
-      "Autonomous enterprise AI agent architecture handling client operations, query routing, and statutory compliance in 6 regional languages.",
-    location: "Ahmedabad, India",
-  },
-  {
-    name: "AgroScale",
-    monogram: "AS",
-    monogramColor: "from-[#263238] to-[#009688]",
-    description:
-      "Direct farm-to-enterprise procurement and cold-chain demand forecasting infrastructure for agricultural producer networks.",
+      "Curated expedition mobility, overland exploration itineraries, and rugged lifestyle travel architectures built for experiential journeys across diverse terrains.",
     location: "Ahmedabad, India",
   },
 ];

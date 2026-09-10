@@ -36,23 +36,25 @@ export default function Navbar() {
       }`}
     >
       <Container className="flex items-center justify-between">
-        {/* Official Brand Logo */}
-        <Link
-          href="/"
-          className="flex items-center focus:outline-none group"
-          id="nav-logo"
-          aria-label="Sanuma India Private Limited Home"
-        >
-          <img
-            src="/logo.png"
-            alt="Sanuma India Private Limited"
-            className="h-7 sm:h-8 w-auto object-contain transition-all duration-300 group-hover:scale-105"
-          />
-        </Link>
+        {/* Left Column: Official Brand Logo */}
+        <div className="flex items-center flex-1 min-w-0">
+          <Link
+            href="/"
+            className="flex items-center focus:outline-none group flex-shrink-0"
+            id="nav-logo"
+            aria-label="Sanuma India Private Limited Home"
+          >
+            <img
+              src="/logo.png"
+              alt="Sanuma India Private Limited"
+              className="h-[22px] sm:h-[25px] w-auto object-contain transition-all duration-300 group-hover:scale-105"
+            />
+          </Link>
+        </div>
 
-        {/* Desktop Navigation */}
+        {/* Center Column: Desktop Navigation Links (True Center) */}
         <nav
-          className="hidden md:flex items-center gap-6 lg:gap-8"
+          className="hidden md:flex items-center justify-center gap-5 lg:gap-7 xl:gap-8 flex-shrink-0"
           aria-label="Main Navigation"
         >
           {NAV_LINKS.map((link) => {
@@ -61,15 +63,15 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`text-sm font-medium transition-colors hover:text-[#009688] relative py-1 ${
-                  isActive ? "text-[#009688]" : "text-[#5F6868]"
+                className={`text-xs lg:text-sm font-medium transition-colors hover:text-[#009688] relative py-1.5 whitespace-nowrap flex items-center ${
+                  isActive ? "text-[#009688] font-semibold" : "text-[#5F6868]"
                 }`}
               >
-                {link.label}
+                <span>{link.label}</span>
                 {isActive && (
                   <motion.span
                     layoutId="activeNavIndicator"
-                    className="absolute bottom-0 left-0 w-full h-[2px] bg-[#009688] rounded-full"
+                    className="absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#009688] rounded-full"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -78,28 +80,30 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex items-center">
-          <Link
-            href="/collaborate"
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-medium bg-[#009688] text-white hover:bg-[#00796B] transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-[#009688]/20 active:scale-95 cursor-pointer group"
-            id="nav-cta"
-          >
-            <span>Let's Talk</span>
-            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
-        </div>
+        {/* Right Column: Desktop CTA & Mobile Hamburger */}
+        <div className="flex items-center justify-end flex-1">
+          <div className="hidden md:flex items-center flex-shrink-0">
+            <Link
+              href="/collaborate"
+              className="inline-flex items-center gap-1.5 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full text-xs lg:text-sm font-medium bg-[#009688] text-white hover:bg-[#00796B] transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-[#009688]/20 active:scale-95 cursor-pointer group whitespace-nowrap"
+              id="nav-cta"
+            >
+              <span>Let's Talk</span>
+              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
+          </div>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 -mr-2 text-[#172121] hover:text-[#009688] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#009688] rounded-lg transition-colors cursor-pointer"
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isOpen}
-          id="nav-hamburger"
-        >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+          {/* Mobile Hamburger Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 -mr-2 text-[#172121] hover:text-[#009688] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#009688] rounded-lg transition-colors cursor-pointer"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            id="nav-hamburger"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </Container>
 
       {/* Mobile Menu Overlay & Drawer with AnimatePresence */}
