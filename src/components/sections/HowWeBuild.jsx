@@ -23,11 +23,29 @@ export default function HowWeBuild() {
   const [trainPos, setTrainPos] = useState(STATION_POSITIONS[0]);
   const [isWarping, setIsWarping] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const sectionRef = useRef(null);
   const timerRef = useRef(null);
 
-  // Continuous Forward-Only Loop with Dwell Time
+  // Viewport observer to pause animation when offscreen
   useEffect(() => {
-    if (isHovered) {
+    const elem = sectionRef.current;
+    if (!elem) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(elem);
+    return () => observer.disconnect();
+  }, []);
+
+  // Continuous Forward-Only Loop with Dwell Time (Active only when visible)
+  useEffect(() => {
+    if (isHovered || !isInView) {
       if (timerRef.current) clearTimeout(timerRef.current);
       return;
     }
@@ -60,7 +78,7 @@ export default function HowWeBuild() {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [activeStation, isHovered]);
+  }, [activeStation, isHovered, isInView]);
 
   // Click/Hover on station
   const handleSelectStation = (idx) => {
@@ -86,6 +104,7 @@ export default function HowWeBuild() {
 
   return (
     <section
+      ref={sectionRef}
       id="how-we-build"
       className="py-16 sm:py-32 bg-[#FFFFFF] relative overflow-hidden"
     >
@@ -101,8 +120,11 @@ export default function HowWeBuild() {
         }}
       />
 
-      {/* Subtle Background Glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[1100px] h-[400px] bg-gradient-to-b from-[#009688]/6 via-[#009688]/2 to-transparent blur-3xl pointer-events-none -z-10" />
+      {/* Subtle Background Glow (GPU-friendly Radial Gradient) */}
+      <div
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[1100px] h-[400px] pointer-events-none -z-10"
+        style={{ background: "radial-gradient(ellipse at center, rgba(0, 150, 136, 0.08) 0%, transparent 70%)" }}
+      />
 
       <Container>
         {/* Section Header */}
@@ -190,7 +212,7 @@ export default function HowWeBuild() {
                     >
                       <span
                         className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors ${
-                          isDocked ? "bg-[#0DF0B0] animate-ping" : "bg-[#8A9696] group-hover:bg-[#009688]"
+                          isDocked ? "bg-[#0DF0B0] animate-pulse" : "bg-[#8A9696] group-hover:bg-[#009688]"
                         }`}
                       />
                     </div>
@@ -227,7 +249,7 @@ export default function HowWeBuild() {
               className="absolute top-[105px] sm:top-[108px] -translate-y-1/2 -translate-x-1/2 z-25 pointer-events-none"
             >
               {/* Maglev Glow underneath */}
-              <div className="absolute -bottom-1 left-1 sm:left-2 right-1 sm:right-2 h-2.5 sm:h-3 bg-[#0DF0B0]/60 blur-md rounded-full" />
+              <div className="absolute -bottom-1 left-1 sm:left-2 right-1 sm:right-2 h-2.5 sm:h-3 rounded-full shadow-[0_0_12px_#0DF0B0]" />
 
               {/* Aerodynamic Train Body */}
               <div className="relative w-20 sm:w-36 h-7 sm:h-11 bg-gradient-to-r from-[#172121] via-[#243333] to-[#0D1515] rounded-r-xl sm:rounded-r-2xl rounded-l-xs sm:rounded-l-md border border-[#009688]/70 shadow-2xl flex items-center px-1.5 sm:px-2">
@@ -249,7 +271,7 @@ export default function HowWeBuild() {
                   <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-white shadow-[0_0_6px_#FFF]" />
                   <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-[#0DF0B0] shadow-[0_0_6px_#0DF0B0]" />
                   {/* Dynamic Light Beam Cone */}
-                  <div className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 w-8 sm:w-16 h-5 sm:h-8 bg-gradient-to-r from-[#0DF0B0]/40 to-transparent blur-[2px] pointer-events-none rounded-r-full" />
+                  <div className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 w-8 sm:w-16 h-5 sm:h-8 bg-gradient-to-r from-[#0DF0B0]/40 to-transparent pointer-events-none rounded-r-full" />
                 </div>
 
                 {/* Train Monogram */}
@@ -275,10 +297,17 @@ export default function HowWeBuild() {
               >
                 {/* DWELL LOADING PROGRESS LINE (Fills up, and when full, train moves!) */}
                 <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#009688]/15 overflow-hidden">
-                  <div
+                  <motion.div
                     key={`${activeStation}-${isHovered}`}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{
+                      duration: DWELL_TIME_MS / 1000,
+                      ease: "linear",
+                    }}
                     style={{
-                      animation: `dwellProgressFill ${DWELL_TIME_MS}ms linear forwards`,
+                      transformOrigin: "left",
+                      willChange: "transform",
                       animationPlayState: isHovered ? "paused" : "running",
                     }}
                     className="h-full bg-gradient-to-r from-[#009688] via-[#0DF0B0] to-[#009688]"

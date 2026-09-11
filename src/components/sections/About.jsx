@@ -19,7 +19,12 @@ export default function About() {
   return (
     <section id="about" className="py-24 sm:py-32 bg-[#F7F9F9] border-t border-b border-[#E5EAEA] relative overflow-hidden" aria-label="About Sanuma">
       {/* Subtle ambient light gradient */}
-      <div className="absolute top-1/2 -right-40 w-96 h-96 rounded-full bg-[#009688]/5 blur-3xl pointer-events-none" />
+      <div
+        className="absolute top-1/2 -right-40 w-96 h-96 rounded-full pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(0,150,136,0.06) 0%, transparent 70%)",
+        }}
+      />
 
       <Container className="relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">

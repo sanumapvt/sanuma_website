@@ -77,8 +77,11 @@ export default function Approach() {
       className="py-16 sm:py-32 bg-[#FAFBFB] border-t border-b border-[#E5EAEA] relative overflow-hidden"
       aria-label="Our Approach"
     >
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-gradient-to-b from-[#009688]/6 via-[#009688]/2 to-transparent blur-3xl pointer-events-none -z-10" />
+      {/* Background ambient lighting (GPU-friendly Radial Gradient) */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] pointer-events-none -z-10"
+        style={{ background: "radial-gradient(ellipse at center, rgba(0, 150, 136, 0.07) 0%, transparent 70%)" }}
+      />
 
       <Container>
         {/* ========================================================================= */}

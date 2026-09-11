@@ -1,11 +1,61 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 
 export default function Hero() {
+  const sectionRef = useRef(null);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const section = sectionRef.current;
+    if (!video || !section) return;
+
+    let isSectionVisible = true;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isSectionVisible = entry.isIntersecting;
+        if (isSectionVisible) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(section);
+
+    // Momentarily pause video during active scrolling on all devices to ensure 60-120fps buttery momentum
+    let scrollTimeout;
+    const handleScrollPause = () => {
+      if (isSectionVisible) {
+        if (!video.paused) {
+          video.pause();
+        }
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          if (isSectionVisible) {
+            video.play().catch(() => {});
+          }
+        }, 150);
+      }
+    };
+
+    window.addEventListener("scroll", handleScrollPause, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScrollPause);
+      clearTimeout(scrollTimeout);
+    };
+  }, []);
+
   const metrics = [
     { label: "Foundation", value: "Strategy First", desc: "Targeted Market Positioning" },
     { label: "Architecture", value: "Scalable Systems", desc: "Repeatable Operating Models" },
@@ -15,21 +65,25 @@ export default function Hero() {
 
   return (
     <section
+      ref={sectionRef}
       className="relative pt-36 pb-20 sm:pt-44 sm:pb-28 lg:pt-52 lg:pb-36 overflow-hidden bg-[#FFFFFF]"
       aria-label="Introduction"
     >
-      {/* Full-Canvas Video Background Layer */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      {/* Full-Canvas Video Background Layer with Hardware Acceleration */}
+      <div
+        className="absolute inset-0 overflow-hidden pointer-events-none z-0"
+        style={{ transform: "translateZ(0)", willChange: "transform" }}
+      >
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           className="w-full h-full object-cover"
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
-
         </video>
 
         {/* Directional Contrast Overlay: Keeps video vibrant on right while providing crisp white backdrop for left text */}

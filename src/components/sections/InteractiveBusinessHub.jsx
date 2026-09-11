@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
@@ -197,6 +197,23 @@ export default function InteractiveBusinessHub() {
   const [activeId, setActiveId] = useState("ops");
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredId, setHoveredId] = useState(null);
+  const [isInView, setIsInView] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const elem = sectionRef.current;
+    if (!elem) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(elem);
+    return () => observer.disconnect();
+  }, []);
 
   const activeDept =
     DEPARTMENTS.find((d) => d.id === (hoveredId || activeId)) || DEPARTMENTS[0];
@@ -205,14 +222,16 @@ export default function InteractiveBusinessHub() {
   // Geometry configuration: perfectly tuned so nodes have 90px+ space between each other
   const centerCoord = 270;
   const orbitRadius = 195;
+  const playState = isInView && !isPaused ? "running" : "paused";
 
   return (
     <section
+      ref={sectionRef}
       id="business-architecture"
       className="py-14 sm:py-20 bg-[#050909] text-white relative overflow-hidden"
       aria-label="The 360° Business Operating System"
     >
-      {/* Background Cyber Ambient Grid & Pulsing Glows */}
+      {/* Background Cyber Ambient Grid & Pulsing Glows (GPU-friendly Radial Gradients) */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
@@ -220,8 +239,14 @@ export default function InteractiveBusinessHub() {
           backgroundSize: "36px 36px",
         }}
       />
-      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-[#009688]/10 blur-[150px] pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] rounded-full bg-[#00E5D0]/8 blur-[140px] pointer-events-none" />
+      <div
+        className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(0, 150, 136, 0.14) 0%, transparent 70%)" }}
+      />
+      <div
+        className="absolute top-1/3 right-1/4 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(0, 229, 208, 0.10) 0%, transparent 70%)" }}
+      />
 
       <Container className="relative z-10">
         {/* Section Header: Compact & Focused without extra eyebrow badge */}
@@ -246,13 +271,12 @@ export default function InteractiveBusinessHub() {
           {/* Left 7 Columns: Continuous Revolving Planetary Orbit Canvas */}
           <div
             className="lg:col-span-7 flex flex-col items-center justify-center relative select-none w-full overflow-hidden py-2"
+            style={{ touchAction: "pan-y" }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => {
               setIsPaused(false);
               setHoveredId(null);
             }}
-            onTouchStart={() => setIsPaused(true)}
-            onTouchEnd={() => setIsPaused(false)}
           >
             {/* Responsive Scaled Orbit Canvas: Enlarged on mobile for better touch and visibility */}
             <div className="relative w-[370px] h-[370px] sm:w-[460px] sm:h-[460px] lg:w-[540px] lg:h-[540px] max-w-[96vw] flex items-center justify-center">
@@ -266,7 +290,8 @@ export default function InteractiveBusinessHub() {
                   className="absolute w-[390px] h-[390px] rounded-full border border-dashed border-[#00E5D0]/35 pointer-events-none"
                   style={{
                     animation: "planetary-orbit 60s linear infinite",
-                    animationPlayState: isPaused ? "paused" : "running",
+                    animationPlayState: playState,
+                    willChange: "transform",
                   }}
                 />
 
@@ -275,7 +300,8 @@ export default function InteractiveBusinessHub() {
                 className="absolute w-[260px] h-[260px] rounded-full border border-white/10 pointer-events-none"
                 style={{
                   animation: "reverse-spin 70s linear infinite",
-                  animationPlayState: isPaused ? "paused" : "running",
+                  animationPlayState: playState,
+                  willChange: "transform",
                 }}
               />
 
@@ -286,13 +312,14 @@ export default function InteractiveBusinessHub() {
                   background:
                     "conic-gradient(from 0deg, transparent 0deg, transparent 280deg, rgba(0, 229, 208, 0.4) 360deg)",
                   animation: "radar-sweep 12s linear infinite",
-                  animationPlayState: isPaused ? "paused" : "running",
+                  animationPlayState: playState,
+                  willChange: "transform",
                 }}
               />
 
               {/* Center Core: THE BUSINESS REACTOR */}
               <div className="relative z-30 flex flex-col items-center justify-center w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-b from-[#132424] via-[#0E1A1A] to-[#060B0B] border-2 border-[#00E5D0] shadow-[0_0_50px_rgba(0,229,208,0.4)] group cursor-pointer">
-                <span className="animate-ping absolute inline-flex h-16 w-16 rounded-full bg-[#00E5D0] opacity-20 pointer-events-none" />
+                <span className="animate-pulse absolute inline-flex h-16 w-16 rounded-full bg-[#00E5D0] opacity-20 pointer-events-none" />
                 <div className="w-11 h-11 rounded-full bg-[#00E5D0]/20 border border-[#00E5D0]/50 flex items-center justify-center text-[#00E5D0] shadow-inner mb-1 group-hover:scale-110 transition-transform">
                   <Zap className="w-5 h-5 text-[#00E5D0] drop-shadow-[0_0_8px_rgba(0,229,208,0.8)]" />
                 </div>
@@ -308,7 +335,8 @@ export default function InteractiveBusinessHub() {
                 className="absolute inset-0 w-full h-full pointer-events-none"
                 style={{
                   animation: "planetary-orbit 55s linear infinite",
-                  animationPlayState: isPaused ? "paused" : "running",
+                  animationPlayState: playState,
+                  willChange: "transform",
                 }}
               >
                 {/* SVG Connecting Laser Spokes from Center to each Node */}
@@ -316,13 +344,6 @@ export default function InteractiveBusinessHub() {
                   className="absolute inset-0 w-full h-full pointer-events-none"
                   viewBox="0 0 540 540"
                 >
-                  <defs>
-                    <filter id="laserGlow" x="-20%" y="-20%" width="140%" height="140%">
-                      <feGaussianBlur stdDeviation="3" result="blur" />
-                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                    </filter>
-                  </defs>
-
                   {DEPARTMENTS.map((dept) => {
                     const rad = (dept.angle * Math.PI) / 180;
                     const x = centerCoord + orbitRadius * Math.cos(rad);
@@ -340,23 +361,17 @@ export default function InteractiveBusinessHub() {
                           stroke={isSelected ? dept.accent : "rgba(255, 255, 255, 0.1)"}
                           strokeWidth={isSelected ? "2.5" : "1"}
                           strokeDasharray={isSelected ? "5 4" : "2 6"}
-                          filter={isSelected ? "url(#laserGlow)" : undefined}
                           className="transition-all duration-300"
                         />
-                        {/* Traveling Energy Pulse on active spoke */}
+                        {/* Static Glowing Energy Dot on active spoke */}
                         {isSelected && (
                           <circle
+                            cx={(centerCoord + x) / 2}
+                            cy={(centerCoord + y) / 2}
                             r="3"
-                            fill="#FFFFFF"
-                            filter="url(#laserGlow)"
-                            className="pointer-events-none"
-                          >
-                            <animateMotion
-                              path={`M ${centerCoord} ${centerCoord} L ${x} ${y}`}
-                              dur="1.5s"
-                              repeatCount="indefinite"
-                            />
-                          </circle>
+                            fill="#00E5D0"
+                            className="pointer-events-none shadow-xs"
+                          />
                         )}
                       </g>
                     );
@@ -385,7 +400,8 @@ export default function InteractiveBusinessHub() {
                       <div
                         style={{
                           animation: "counter-rotate 55s linear infinite",
-                          animationPlayState: isPaused ? "paused" : "running",
+                          animationPlayState: playState,
+                          willChange: "transform",
                         }}
                         className="flex flex-col items-center"
                       >
@@ -402,10 +418,10 @@ export default function InteractiveBusinessHub() {
                         >
                           {/* Circular Planetary Orb */}
                           <div
-                            className={`relative w-13 h-13 rounded-2xl flex items-center justify-center backdrop-blur-2xl transition-all duration-300 ${
+                            className={`relative w-13 h-13 rounded-2xl flex items-center justify-center transition-all duration-300 ${
                               isSelected
-                                ? "border-2 border-white shadow-[0_0_30px_rgba(0,229,208,0.8)]"
-                                : "bg-[#0C1616]/90 border border-white/20 hover:border-white/50 shadow-lg"
+                                ? "border-2 border-white shadow-[0_0_30px_rgba(0,229,208,0.8)] bg-[#0C1616]"
+                                : "bg-[#0C1616] border border-white/20 hover:border-white/50 shadow-lg"
                             }`}
                             style={{
                               backgroundColor: isSelected ? dept.accent : undefined,
@@ -464,15 +480,17 @@ export default function InteractiveBusinessHub() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.98 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#091313]/90 border border-white/15 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.7)] relative overflow-hidden backdrop-blur-xl"
+                className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#091313] border border-white/15 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.7)] relative overflow-hidden"
                 style={{
                   borderColor: `${activeDept.accent}35`,
                 }}
               >
                 {/* Subtle Ambient Glow */}
                 <div
-                  className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-3xl pointer-events-none opacity-20"
-                  style={{ backgroundColor: activeDept.accent }}
+                  className="absolute -top-20 -right-20 w-48 h-48 rounded-full pointer-events-none opacity-20"
+                  style={{
+                    background: `radial-gradient(circle, ${activeDept.accent} 0%, transparent 70%)`,
+                  }}
                 />
 
                 {/* Department Header */}

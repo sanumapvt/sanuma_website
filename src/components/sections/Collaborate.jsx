@@ -9,7 +9,12 @@ export default function Collaborate() {
       <Container>
         <div className="bg-white border border-[#E5EAEA] rounded-3xl p-10 sm:p-16 lg:p-20 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] text-center relative overflow-hidden">
           {/* Subtle brand ambient glow */}
-          <div className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#009688]/5 rounded-full blur-3xl pointer-events-none" />
+          <div
+            className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, rgba(0,150,136,0.06) 0%, transparent 70%)",
+            }}
+          />
 
           <div className="relative max-w-2xl mx-auto">
             {/* Badge */}
