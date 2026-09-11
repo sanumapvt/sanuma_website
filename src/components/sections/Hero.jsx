@@ -11,6 +11,11 @@ export default function Hero() {
   const videoRef = useRef(null);
 
   useEffect(() => {
+    // Completely bypass video playback on mobile screens (< 768px)
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      return;
+    }
+
     const video = videoRef.current;
     const section = sectionRef.current;
     if (!video || !section) return;
@@ -31,7 +36,7 @@ export default function Hero() {
 
     observer.observe(section);
 
-    // Momentarily pause video during active scrolling on all devices to ensure 60-120fps buttery momentum
+    // Momentarily pause video during active desktop scrolling to guarantee 60-120fps buttery momentum
     let scrollTimeout;
     const handleScrollPause = () => {
       if (isSectionVisible) {
@@ -69,9 +74,9 @@ export default function Hero() {
       className="relative pt-36 pb-20 sm:pt-44 sm:pb-28 lg:pt-52 lg:pb-36 overflow-hidden bg-[#FFFFFF]"
       aria-label="Introduction"
     >
-      {/* Full-Canvas Video Background Layer with Hardware Acceleration */}
+      {/* Full-Canvas Video Background Layer (Desktop/Laptop Only - Hidden on Mobile) */}
       <div
-        className="absolute inset-0 overflow-hidden pointer-events-none z-0"
+        className="hidden md:block absolute inset-0 overflow-hidden pointer-events-none z-0"
         style={{ transform: "translateZ(0)", willChange: "transform" }}
       >
         <video
@@ -87,10 +92,19 @@ export default function Hero() {
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
 
-        {/* Directional Contrast Overlay: Keeps video vibrant on right while providing crisp white backdrop for left text */}
+        {/* Directional Contrast Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 md:via-white/60 to-white/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/30" />
       </div>
+
+      {/* Ultra-Clean Ambient Background for Mobile Phones (0% CPU, 0% GPU, Zero Lag) */}
+      <div
+        className="md:hidden absolute inset-0 overflow-hidden pointer-events-none z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 85% 15%, rgba(0, 150, 136, 0.08) 0%, transparent 60%), radial-gradient(ellipse at 15% 85%, rgba(13, 240, 176, 0.05) 0%, transparent 50%)",
+        }}
+      />
 
       <Container className="relative z-10">
         <div className="max-w-4xl">
