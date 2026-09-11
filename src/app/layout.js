@@ -5,6 +5,7 @@ import Footer from "@/components/layout/Footer";
 import { SITE_CONFIG } from "@/lib/constants";
 import { getOrganizationSchema, getWebSiteSchema } from "@/lib/schema";
 import { ScrollProgressBar } from "@/components/ui/MotionReveal";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -106,12 +107,14 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-screen flex flex-col bg-white text-[#172121] antialiased selection:bg-[#009688] selection:text-white">
-        <ScrollProgressBar />
-        <Navbar />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <SmoothScrollProvider>
+          <ScrollProgressBar />
+          <Navbar />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

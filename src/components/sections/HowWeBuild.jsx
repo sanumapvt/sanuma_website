@@ -7,7 +7,7 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { SITE_CONFIG } from "@/lib/constants";
 import { ArrowRight, ArrowLeft, Sparkles } from "lucide-react";
-import { FadeIn } from "@/components/ui/MotionReveal";
+import { FadeIn, SectionReveal } from "@/components/ui/MotionReveal";
 
 // Exact original content from SITE_CONFIG.buildSteps
 const BUILD_STEPS = SITE_CONFIG.buildSteps;

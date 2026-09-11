@@ -111,7 +111,7 @@ export default function Hero() {
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="text-4xl sm:text-6xl md:text-7xl lg:text-[80px] font-extrabold tracking-tight text-[#172121] leading-[1.08] mb-6 sm:mb-8 drop-shadow-xs"
           >
             We build world-class{" "}
@@ -121,7 +121,7 @@ export default function Hero() {
               <motion.span
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.85, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
                 className="absolute bottom-1.5 left-0 right-0 h-[3px] bg-[#009688]/30 rounded-full origin-left"
                 aria-hidden="true"
               />
@@ -132,7 +132,7 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.75, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="text-lg sm:text-xl lg:text-2xl text-[#1F2937] leading-relaxed max-w-2xl mb-10 sm:mb-12 font-medium"
           >
             Sanuma builds and scales businesses using systems, processes, AI
@@ -143,7 +143,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.75, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5"
           >
             <Button
@@ -169,9 +169,9 @@ export default function Hero() {
 
         {/* Minimal metrics / reassurance strip with staggered interactive cards */}
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.85, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
           className="mt-20 sm:mt-24 pt-8 border-t border-[#E5EAEA] grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6"
         >
           {metrics.map((item, idx) => (

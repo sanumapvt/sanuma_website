@@ -2,6 +2,9 @@
 
 import { motion, useScroll } from "framer-motion";
 
+// Signature modern cubic-bezier curve (Apple/Linear standard - smooth glide, zero harsh snapping)
+const MODERN_EASE = [0.16, 1, 0.3, 1];
+
 export function ScrollProgressBar() {
   const { scrollYProgress } = useScroll();
 
@@ -18,8 +21,8 @@ export function FadeIn({
   className = "",
   delay = 0,
   direction = "up",
-  distance = 24,
-  duration = 0.6,
+  distance = 18,
+  duration = 0.65,
   once = true,
   ...props
 }) {
@@ -37,11 +40,38 @@ export function FadeIn({
     <motion.div
       initial={{ opacity: 0, ...offset }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once, margin: "-40px" }}
+      viewport={{ once, margin: "0px 0px 60px 0px", amount: 0 }}
       transition={{
         duration,
         delay,
-        ease: [0.22, 1, 0.36, 1],
+        ease: MODERN_EASE,
+      }}
+      className={className}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function SectionReveal({
+  children,
+  className = "",
+  delay = 0,
+  yOffset = 20,
+  duration = 0.7,
+  once = true,
+  ...props
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: yOffset }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once, margin: "0px 0px 80px 0px", amount: 0 }}
+      transition={{
+        duration,
+        delay,
+        ease: MODERN_EASE,
       }}
       className={className}
       {...props}
@@ -55,19 +85,19 @@ export function ScaleIn({
   children,
   className = "",
   delay = 0,
-  duration = 0.5,
+  duration = 0.6,
   once = true,
   ...props
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
+      initial={{ opacity: 0, scale: 0.97 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once, margin: "-40px" }}
+      viewport={{ once, margin: "0px 0px 60px 0px", amount: 0 }}
       transition={{
         duration,
         delay,
-        ease: [0.22, 1, 0.36, 1],
+        ease: MODERN_EASE,
       }}
       className={className}
       {...props}
@@ -89,7 +119,7 @@ export function StaggerContainer({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, margin: "-40px" }}
+      viewport={{ once, margin: "0px 0px 60px 0px", amount: 0 }}
       variants={{
         hidden: {},
         visible: {
@@ -110,8 +140,8 @@ export function StaggerContainer({
 export function StaggerItem({
   children,
   className = "",
-  yOffset = 20,
-  duration = 0.5,
+  yOffset = 16,
+  duration = 0.6,
   ...props
 }) {
   return (
@@ -123,7 +153,7 @@ export function StaggerItem({
           y: 0,
           transition: {
             duration,
-            ease: [0.22, 1, 0.36, 1],
+            ease: MODERN_EASE,
           },
         },
       }}

@@ -17,7 +17,7 @@ import {
   Zap,
   ArrowRight,
 } from "lucide-react";
-import { FadeIn } from "@/components/ui/MotionReveal";
+import { FadeIn, SectionReveal } from "@/components/ui/MotionReveal";
 
 const DEPARTMENTS = [
   {
@@ -457,8 +457,8 @@ export default function InteractiveBusinessHub() {
                   >
                     {DEPARTMENTS.map((dept) => {
                       const rad = (dept.angle * Math.PI) / 180;
-                      const x = centerCoord + orbitRadius * Math.cos(rad);
-                      const y = centerCoord + orbitRadius * Math.sin(rad);
+                      const x = Math.round((centerCoord + orbitRadius * Math.cos(rad)) * 100) / 100;
+                      const y = Math.round((centerCoord + orbitRadius * Math.sin(rad)) * 100) / 100;
                       const isSelected = dept.id === activeDept.id;
 
                       return (
@@ -492,8 +492,8 @@ export default function InteractiveBusinessHub() {
                   {/* The 9 Distinct Planetary Satellite Orbs */}
                   {DEPARTMENTS.map((dept) => {
                     const rad = (dept.angle * Math.PI) / 180;
-                    const x = centerCoord + orbitRadius * Math.cos(rad);
-                    const y = centerCoord + orbitRadius * Math.sin(rad);
+                    const x = Math.round((centerCoord + orbitRadius * Math.cos(rad)) * 100) / 100;
+                    const y = Math.round((centerCoord + orbitRadius * Math.sin(rad)) * 100) / 100;
                     const isSelected = dept.id === activeDept.id;
                     const Icon = dept.icon;
 
