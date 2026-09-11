@@ -7,13 +7,25 @@ export default function SmoothScrollProvider({ children }) {
   const lenisRef = useRef(null);
 
   useEffect(() => {
-    // Respect accessibility reduced motion preference
     if (typeof window === "undefined") return;
+
+    // Respect accessibility reduced motion preference
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-
     if (prefersReducedMotion) return;
+
+    // On mobile touch screens, native 120Hz OS momentum is already buttery smooth.
+    // Hijacking touch with JS causes touch lag/stutter on phones.
+    // Lenis is optimized for desktop mousewheel and trackpad momentum.
+    const isTouchDevice =
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.innerWidth < 768;
+
+    if (isTouchDevice) {
+      return;
+    }
 
     const lenis = new Lenis({
       duration: 1.2,
@@ -22,7 +34,7 @@ export default function SmoothScrollProvider({ children }) {
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 0.95,
-      touchMultiplier: 1.4,
+      syncTouch: false,
       infinite: false,
     });
 

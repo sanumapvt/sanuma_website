@@ -198,7 +198,17 @@ export default function InteractiveBusinessHub() {
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredId, setHoveredId] = useState(null);
   const [isInView, setIsInView] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const elem = sectionRef.current;
@@ -222,7 +232,7 @@ export default function InteractiveBusinessHub() {
   // Geometry configuration: perfectly tuned so nodes have 90px+ space between each other
   const centerCoord = 270;
   const orbitRadius = 195;
-  const playState = isInView && !isPaused ? "running" : "paused";
+  const playState = isDesktop && isInView && !isPaused ? "running" : "paused";
 
   return (
     <section
@@ -231,20 +241,20 @@ export default function InteractiveBusinessHub() {
       className="py-14 sm:py-20 bg-[#050909] text-white relative overflow-hidden"
       aria-label="The 360° Business Operating System"
     >
-      {/* Background Cyber Ambient Grid & Pulsing Glows (GPU-friendly Radial Gradients) */}
+      {/* Background Cyber Ambient Grid & Pulsing Glows (Desktop Only - 0% Overhead on Mobile) */}
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        className="hidden md:block absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `radial-gradient(#00E5D0 1.5px, transparent 1.5px)`,
           backgroundSize: "36px 36px",
         }}
       />
       <div
-        className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full pointer-events-none"
+        className="hidden md:block absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(0, 150, 136, 0.14) 0%, transparent 70%)" }}
       />
       <div
-        className="absolute top-1/3 right-1/4 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] rounded-full pointer-events-none"
+        className="hidden md:block absolute top-1/3 right-1/4 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] rounded-full pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(0, 229, 208, 0.10) 0%, transparent 70%)" }}
       />
 
@@ -391,7 +401,8 @@ export default function InteractiveBusinessHub() {
         </div>
 
         {/* 2. DESKTOP (>= lg): 12-Column Grid with 360° Orbit (7 cols) + Desktop HUD Card (5 cols) */}
-        <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center">
+        {isDesktop && (
+          <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center">
           {/* Left 7 Columns: Continuous Revolving Planetary Orbit Canvas */}
           <div
             className="col-span-7 flex flex-col items-center justify-center relative select-none w-full overflow-hidden py-2"
@@ -657,6 +668,7 @@ export default function InteractiveBusinessHub() {
             </div>
           </div>
         </div>
+      )}
       </Container>
 
       {/* Embedded 60fps GPU Keyframe Animations */}
