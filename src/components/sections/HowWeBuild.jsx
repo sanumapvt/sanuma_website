@@ -43,8 +43,13 @@ export default function HowWeBuild() {
     return () => observer.disconnect();
   }, []);
 
-  // Continuous Forward-Only Loop with Dwell Time (Active only when visible)
+  // Continuous Forward-Only Loop with Dwell Time (Active only on Desktop/Tablet when visible and not hovered)
   useEffect(() => {
+    // Disable aggressive auto-advance on mobile phones to prevent layout stutter & frame drops while reading/scrolling
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      return;
+    }
+
     if (isHovered || !isInView) {
       if (timerRef.current) clearTimeout(timerRef.current);
       return;
@@ -163,12 +168,14 @@ export default function HowWeBuild() {
             <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-[#FAFBFB] to-transparent z-30 pointer-events-none" />
             <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-[#FAFBFB] to-transparent z-30 pointer-events-none" />
 
-            {/* 1. Track Sleepers (Rail Ties Pattern - Centered on Track Line) */}
-            <div className="absolute top-[105px] sm:top-[108px] -translate-y-1/2 left-0 right-0 h-6 sm:h-7 flex items-center justify-around pointer-events-none opacity-25">
-              {Array.from({ length: 44 }).map((_, i) => (
-                <div key={i} className="w-1 sm:w-1.5 h-full bg-[#5F6868] rounded-xs" />
-              ))}
-            </div>
+            {/* 1. Track Sleepers (Rail Ties Pattern - Hardware Accelerated CSS Gradient) */}
+            <div
+              className="absolute top-[105px] sm:top-[108px] -translate-y-1/2 left-0 right-0 h-6 sm:h-7 pointer-events-none opacity-25"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(to right, #5F6868 0px, #5F6868 3px, transparent 3px, transparent 22px)",
+              }}
+            />
 
             {/* 2. Dual Steel Rails + Glowing Central Maglev Rail (Centered on Track Line) */}
             <div className="absolute top-[105px] sm:top-[108px] -translate-y-1/2 left-0 right-0 h-5 sm:h-6 flex flex-col justify-between pointer-events-none">
@@ -286,33 +293,32 @@ export default function HowWeBuild() {
           {/* ACTIVE STATION CARD WITH DWELL LOADING LINE (MOBILE & DESKTOP)        */}
           {/* ===================================================================== */}
           <div className="mt-4 sm:mt-6 max-w-3xl mx-auto">
-            <AnimatePresence mode="wait">
+            <div className="p-5 sm:p-10 rounded-2xl sm:rounded-3xl bg-white border-2 border-[#009688] shadow-xl sm:shadow-2xl shadow-[#009688]/15 relative overflow-hidden ring-2 sm:ring-4 ring-[#009688]/10">
+              {/* DWELL LOADING PROGRESS LINE (Fills up, and when full, train moves!) */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#009688]/15 overflow-hidden">
+                <motion.div
+                  key={`${activeStation}-${isHovered}`}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{
+                    duration: DWELL_TIME_MS / 1000,
+                    ease: "linear",
+                  }}
+                  style={{
+                    transformOrigin: "left",
+                    willChange: "transform",
+                    animationPlayState: isHovered ? "paused" : "running",
+                  }}
+                  className="h-full bg-gradient-to-r from-[#009688] via-[#0DF0B0] to-[#009688]"
+                />
+              </div>
+
               <motion.div
                 key={currentStep.number}
-                initial={{ opacity: 0, y: 12, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10, scale: 0.98 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="p-5 sm:p-10 rounded-2xl sm:rounded-3xl bg-white border-2 border-[#009688] shadow-xl sm:shadow-2xl shadow-[#009688]/15 relative overflow-hidden ring-2 sm:ring-4 ring-[#009688]/10"
+                initial={{ opacity: 0.8 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.2 }}
               >
-                {/* DWELL LOADING PROGRESS LINE (Fills up, and when full, train moves!) */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#009688]/15 overflow-hidden">
-                  <motion.div
-                    key={`${activeStation}-${isHovered}`}
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{
-                      duration: DWELL_TIME_MS / 1000,
-                      ease: "linear",
-                    }}
-                    style={{
-                      transformOrigin: "left",
-                      willChange: "transform",
-                      animationPlayState: isHovered ? "paused" : "running",
-                    }}
-                    className="h-full bg-gradient-to-r from-[#009688] via-[#0DF0B0] to-[#009688]"
-                  />
-                </div>
 
                 {/* Card Header with Number, Tag and Status Badge */}
                 <div className="flex items-center justify-between mb-4 sm:mb-6 pt-1">
@@ -389,7 +395,7 @@ export default function HowWeBuild() {
                   </button>
                 </div>
               </motion.div>
-            </AnimatePresence>
+            </div>
           </div>
         </div>
       </Container>

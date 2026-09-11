@@ -265,12 +265,58 @@ export default function InteractiveBusinessHub() {
         </div>
 
         {/* ========================================================================= */}
-        {/* RESPONSIVE 360° VIEW: Revolving Planetary Orbit + Clean HUD Card (Mobile + Desktop) */}
+        {/* RESPONSIVE 360° VIEW: Mobile Touch Grid (<lg) & Desktop Revolving Orbit (>=lg) */}
         {/* ========================================================================= */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 xl:gap-12 items-center">
-          {/* Left 7 Columns: Continuous Revolving Planetary Orbit Canvas */}
+          {/* MOBILE & TABLET: Ultra-Lightweight Touch Matrix (Zero 13-Animation Lag on Phones) */}
+          <div className="col-span-12 lg:hidden">
+            <div className="grid grid-cols-3 gap-2 sm:gap-2.5 max-w-md mx-auto">
+              {DEPARTMENTS.map((dept) => {
+                const isSelected = dept.id === activeDept.id;
+                const Icon = dept.icon;
+
+                return (
+                  <button
+                    key={`mobile-${dept.id}`}
+                    type="button"
+                    onClick={() => {
+                      setActiveId(dept.id);
+                      setHoveredId(dept.id);
+                    }}
+                    className={`p-2.5 sm:p-3 rounded-xl border transition-all duration-150 flex flex-col items-center justify-center text-center cursor-pointer active:scale-95 ${
+                      isSelected
+                        ? "bg-[#00E5D0]/15 border-[#00E5D0] shadow-md shadow-[#00E5D0]/20"
+                        : "bg-[#091313] border-white/10 text-white/70 hover:border-white/25 hover:text-white"
+                    }`}
+                  >
+                    <div
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center mb-1 transition-colors ${
+                        isSelected
+                          ? "bg-[#00E5D0] text-[#050909]"
+                          : "bg-white/5 text-white/80"
+                      }`}
+                    >
+                      <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    </div>
+                    <span
+                      className={`text-[10px] sm:text-xs font-bold leading-tight line-clamp-1 ${
+                        isSelected ? "text-white" : "text-white/70"
+                      }`}
+                    >
+                      {dept.short}
+                    </span>
+                    <span className="text-[8px] font-mono text-white/40 mt-0.5">
+                      {dept.num}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* DESKTOP (>=lg): High-End Revolving Planetary Orbit Canvas */}
           <div
-            className="lg:col-span-7 flex flex-col items-center justify-center relative select-none w-full overflow-hidden py-2"
+            className="hidden lg:flex lg:col-span-7 flex-col items-center justify-center relative select-none w-full overflow-hidden py-2"
             style={{ touchAction: "pan-y" }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => {
@@ -278,13 +324,13 @@ export default function InteractiveBusinessHub() {
               setHoveredId(null);
             }}
           >
-            {/* Responsive Scaled Orbit Canvas: Enlarged on mobile for better touch and visibility */}
-            <div className="relative w-[370px] h-[370px] sm:w-[460px] sm:h-[460px] lg:w-[540px] lg:h-[540px] max-w-[96vw] flex items-center justify-center">
-              <div className="absolute w-[540px] h-[540px] scale-[0.68] sm:scale-[0.85] lg:scale-100 origin-center flex items-center justify-center">
+            {/* Responsive Scaled Orbit Canvas */}
+            <div className="relative w-[540px] h-[540px] flex items-center justify-center">
+              <div className="absolute w-[540px] h-[540px] origin-center flex items-center justify-center">
                 {/* Outer Subtle Orbit Guide Ring */}
                 <div className="absolute w-[490px] h-[490px] rounded-full border border-white/10 pointer-events-none opacity-40" />
 
-                {/* Main Orbit Path (The path on which nodes travel) */}
+                {/* Main Orbit Path */}
                 <div className="absolute w-[390px] h-[390px] rounded-full border border-white/15 pointer-events-none shadow-[0_0_40px_rgba(0,150,136,0.15)]" />
                 <div
                   className="absolute w-[390px] h-[390px] rounded-full border border-dashed border-[#00E5D0]/35 pointer-events-none"
@@ -295,50 +341,38 @@ export default function InteractiveBusinessHub() {
                   }}
                 />
 
-              {/* Inner Reverse Tech Orbit Ring */}
-              <div
-                className="absolute w-[260px] h-[260px] rounded-full border border-white/10 pointer-events-none"
-                style={{
-                  animation: "reverse-spin 70s linear infinite",
-                  animationPlayState: playState,
-                  willChange: "transform",
-                }}
-              />
+                {/* Inner Reverse Tech Orbit Ring */}
+                <div
+                  className="absolute w-[260px] h-[260px] rounded-full border border-white/10 pointer-events-none"
+                  style={{
+                    animation: "reverse-spin 70s linear infinite",
+                    animationPlayState: playState,
+                    willChange: "transform",
+                  }}
+                />
 
-              {/* Conic Radar Light Sweep from Center */}
-              <div
-                className="absolute w-[390px] h-[390px] rounded-full pointer-events-none opacity-20"
-                style={{
-                  background:
-                    "conic-gradient(from 0deg, transparent 0deg, transparent 280deg, rgba(0, 229, 208, 0.4) 360deg)",
-                  animation: "radar-sweep 12s linear infinite",
-                  animationPlayState: playState,
-                  willChange: "transform",
-                }}
-              />
-
-              {/* Center Core: THE BUSINESS REACTOR */}
-              <div className="relative z-30 flex flex-col items-center justify-center w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-b from-[#132424] via-[#0E1A1A] to-[#060B0B] border-2 border-[#00E5D0] shadow-[0_0_50px_rgba(0,229,208,0.4)] group cursor-pointer">
-                <span className="animate-pulse absolute inline-flex h-16 w-16 rounded-full bg-[#00E5D0] opacity-20 pointer-events-none" />
-                <div className="w-11 h-11 rounded-full bg-[#00E5D0]/20 border border-[#00E5D0]/50 flex items-center justify-center text-[#00E5D0] shadow-inner mb-1 group-hover:scale-110 transition-transform">
-                  <Zap className="w-5 h-5 text-[#00E5D0] drop-shadow-[0_0_8px_rgba(0,229,208,0.8)]" />
+                {/* Center Core: THE BUSINESS REACTOR */}
+                <div className="relative z-30 flex flex-col items-center justify-center w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-b from-[#132424] via-[#0E1A1A] to-[#060B0B] border-2 border-[#00E5D0] shadow-[0_0_50px_rgba(0,229,208,0.4)] group cursor-pointer">
+                  <span className="animate-pulse absolute inline-flex h-16 w-16 rounded-full bg-[#00E5D0] opacity-20 pointer-events-none" />
+                  <div className="w-11 h-11 rounded-full bg-[#00E5D0]/20 border border-[#00E5D0]/50 flex items-center justify-center text-[#00E5D0] shadow-inner mb-1 group-hover:scale-110 transition-transform">
+                    <Zap className="w-5 h-5 text-[#00E5D0] drop-shadow-[0_0_8px_rgba(0,229,208,0.8)]" />
+                  </div>
+                  <div className="text-[12px] font-extrabold uppercase tracking-[0.25em] text-white">
+                    BUSINESS
+                  </div>
                 </div>
-                <div className="text-[12px] font-extrabold uppercase tracking-[0.25em] text-white">
-                  BUSINESS
-                </div>
-              </div>
 
-              {/* --------------------------------------------------------------------- */}
-              {/* THE 9 REVOLVING PLANETARY ORBS + DYNAMIC SVG LASER SPOKES             */}
-              {/* --------------------------------------------------------------------- */}
-              <div
-                className="absolute inset-0 w-full h-full pointer-events-none"
-                style={{
-                  animation: "planetary-orbit 55s linear infinite",
-                  animationPlayState: playState,
-                  willChange: "transform",
-                }}
-              >
+                {/* --------------------------------------------------------------------- */}
+                {/* THE 9 REVOLVING PLANETARY ORBS + DYNAMIC SVG LASER SPOKES             */}
+                {/* --------------------------------------------------------------------- */}
+                <div
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  style={{
+                    animation: "planetary-orbit 55s linear infinite",
+                    animationPlayState: playState,
+                    willChange: "transform",
+                  }}
+                >
                 {/* SVG Connecting Laser Spokes from Center to each Node */}
                 <svg
                   className="absolute inset-0 w-full h-full pointer-events-none"
