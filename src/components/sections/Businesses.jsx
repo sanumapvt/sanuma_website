@@ -5,7 +5,7 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { BUSINESSES } from "@/data/businesses";
-import { ArrowUpRight, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ShieldCheck } from "lucide-react";
 import { FadeIn } from "@/components/ui/MotionReveal";
 
 export default function Businesses() {
@@ -85,24 +85,14 @@ export default function Businesses() {
                       </h3>
                     </div>
 
-                    {/* Subtle External Arrow */}
+                    {/* Subtle Internal Navigation Arrow */}
                     <div className="w-8 h-8 rounded-full bg-white border border-[#E5EAEA] group-hover:border-[#009688] group-hover:bg-[#009688] text-[#5F6868] group-hover:text-white flex items-center justify-center transition-all shadow-xs flex-shrink-0">
-                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
                     </div>
                   </div>
                 );
 
-                return biz.website ? (
-                  <a
-                    key={`${biz.name}-${idx}`}
-                    href={biz.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block flex-shrink-0"
-                  >
-                    {Card}
-                  </a>
-                ) : (
+                return (
                   <Link
                     key={`${biz.name}-${idx}`}
                     href="/businesses"
@@ -138,7 +128,7 @@ export default function Businesses() {
         )}
       </Container>
 
-      {/* 60fps GPU Hardware Accelerated Infinite Marquee Keyframe */}
+      {/* 60fps GPU Hardware Accelerated Infinite Marquee Keyframe (Graceful & Calmer Pace) */}
       <style jsx global>{`
         @keyframes business-marquee {
           0% {
@@ -151,7 +141,7 @@ export default function Businesses() {
         .marquee-ticker {
           display: flex;
           width: max-content;
-          animation: business-marquee 20s linear infinite;
+          animation: business-marquee 38s linear infinite;
           will-change: transform;
         }
         .marquee-ticker:hover {
